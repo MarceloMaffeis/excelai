@@ -168,7 +168,11 @@ def render_modulo4_page():
                 else:
                     return "background-color: #FEE2E2; color: #991B1B; font-weight: bold;"
                     
-            styled_df = vendas_df.style.applymap(highlight_meta, subset=["Atingimento_%"])
+            styler = vendas_df.style
+            if hasattr(styler, "map"):
+                styled_df = styler.map(highlight_meta, subset=["Atingimento_%"])
+            else:
+                styled_df = styler.applymap(highlight_meta, subset=["Atingimento_%"])
             st.dataframe(styled_df, use_container_width=True)
             
             st.caption("No Excel real, você cria essas três regras selecionando a coluna -> 'Formatação Condicional' -> 'Regras de Realce das Células'.")
