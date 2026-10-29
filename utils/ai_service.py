@@ -87,6 +87,48 @@ def simulate_offline_response(prompt: str, system_context: str = "") -> str:
             "**🛡️ Auditoria Humana:**\n"
             "- Menos é mais: remova linhas de grade desnecessárias e use títulos autoexplicativos."
         )
+    elif "procv" in lower or "vlookup" in lower or "índice" in lower or "corresp" in lower:
+        return (
+            "### 🎓 Tutor Educacional (Modo Simulado Inteligente)\n\n"
+            "**Solução de Procura e Referência:**\n"
+            "Para buscar dados entre tabelas no Excel, utilize `=PROCV(valor; matriz; coluna; 0)` ou a combinação moderna `=ÍNDICE + CORRESP`.\n\n"
+            "**Exemplo de PROCV com SEERRO:**\n"
+            "```excel\n=SEERRO(PROCV(A2; Tbl_Produtos; 2; 0); \"Não Encontrado\")\n```\n\n"
+            "**💡 Sugestão de Prompt para a IA:**\n"
+            "> *'Crie uma fórmula no Excel que procure o código da célula A2 na tabela de fornecedores e retorne a coluna de telefone. Trate erros caso o código não exista.'*\n\n"
+            "**🛡️ Atenção a Detalhes:**\n"
+            "- Use sempre `0` ou `FALSO` como último argumento para busca exata!"
+        )
+    elif "vba" in lower or "macro" in lower:
+        return (
+            "### 🎓 Tutor Educacional: Automação com Macros e VBA\n\n"
+            "**Estrutura de uma Macro no Excel:**\n"
+            "Você pode automatizar rotinas no Editor do Visual Basic (`Alt + F11`):\n\n"
+            "```vba\n"
+            "Sub LimparDados()\n"
+            "    Range(\"A2:D50\").ClearContents\n"
+            "    MsgBox \"Dados limpos com sucesso!\", vbInformation, \"Automação\"\n"
+            "End Sub\n"
+            "```\n\n"
+            "**💡 Como pedir para a IA:**\n"
+            "> *'Escreva um código VBA para o Excel que percorra a coluna C e oculte as linhas com saldo zerado.'*\n"
+        )
+    elif "seerro" in lower or "erro" in lower:
+        return (
+            "### 🎓 Tutor Educacional (Tratamento de Erros)\n\n"
+            "**Solução Recomendada no Excel:**\n"
+            "A função `=SEERRO(expressão; valor_se_erro)` intercepta mensagens técnicas como `#N/D`, `#DIV/0!` e `#VALOR!`.\n\n"
+            "**Exemplo:**\n"
+            "```excel\n=SEERRO(A1/B1; 0)\n```\n"
+            "Se B1 for zero, em vez de dar erro, exibe 0!"
+        )
+    elif "atingir meta" in lower or "goal seek" in lower:
+        return (
+            "### 🎓 Tutor Educacional: Atingir Meta (Goal Seek)\n\n"
+            "**Como utilizar no Excel:**\n"
+            "Menu `Dados` -> `Teste de Hipóteses` -> `Atingir Meta`.\n"
+            "Permite calcular o valor necessário em uma célula para atingir o resultado desejado na fórmula de destino!"
+        )
     elif "ética" in lower or "lgpd" in lower or "privacidade" in lower:
         return (
             "### 🎓 Tutor Educacional: Ética & LGPD no uso de IA\n\n"

@@ -1,7 +1,8 @@
 """
-Módulo: Biblioteca Mundial de Recursos (Acesso Livre).
+Módulo: Biblioteca Mundial de Recursos & Fundamentos da Informática (Acesso Livre).
 Área pública sem necessidade de senha contendo curadoria internacional de documentações,
-links oficiais da Microsoft, guias de prompt engineering, ética/LGPD, datasets e curiosidades.
+links oficiais da Microsoft, guias de prompt engineering, fundamentos de hardware e software,
+ética/LGPD, datasets e curiosidades.
 """
 
 import streamlit as st
@@ -9,8 +10,8 @@ from utils.ui_components import render_header, render_footer
 
 def render_biblioteca_page():
     render_header(
-        title="Biblioteca Mundial de Recursos & Curiosidades",
-        subtitle="Acesso 100% Livre e Gratuito • Curadoria de Referências Internacionais e Ferramentas",
+        title="Biblioteca Mundial de Recursos & Fundamentos",
+        subtitle="Acesso 100% Livre e Gratuito • Curadoria de Referências Internacionais, Hardware e Ferramentas",
         icon="📚"
     )
     
@@ -19,16 +20,17 @@ def render_biblioteca_page():
         <div class="hero-card" style="background: linear-gradient(135deg, #0F766E 0%, #0D9488 100%);">
             <h2>Conhecimento Aberto para Todo o Mundo</h2>
             <p>
-                Esta biblioteca é o único espaço do portal com <strong>acesso totalmente livre e sem senha</strong>.
-                Aqui reunimos documentações oficiais, guias técnicos de ponta, referências mundiais de ética,
-                planilhas abertas para download e conteúdos históricos que inspiraram os grandes avanços da tecnologia.
+                Esta biblioteca é o espaço do portal com <strong>acesso totalmente livre e sem senha</strong>.
+                Aqui reunimos documentações oficiais, fundamentos clássicos da computação e hardware, guias técnicos de ponta,
+                referências de ética, planilhas abertas para download e conteúdos históricos que inspiraram a revolução digital.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
     
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+        "💻 Fundamentos da Informática",
         "🏢 Microsoft & Excel Oficial",
         "🧠 IA & Engenharia de Prompt",
         "⚖️ Ética, LGPD & Segurança",
@@ -37,6 +39,74 @@ def render_biblioteca_page():
     ])
     
     with tab1:
+        st.markdown("### 💻 Fundamentos da Informática: A Base de Tudo")
+        st.write(
+            "Antes de dominar planilhas e modelos de IA, todo bom profissional compreende como a informação é processada:"
+        )
+        
+        c_f1, c_f2 = st.columns(2)
+        with c_f1:
+            st.markdown(
+                """
+                #### 🖥️ A Tríade da Informática
+                - **Hardware:** A parte física palpável (placas, processador, teclado, mouse, monitor).
+                - **Software:** A parte lógica (sistemas operacionais como Windows/Linux e aplicativos como Excel/Word).
+                - **Peopleware:** As pessoas que utilizam, programam e operam os sistemas.
+                
+                #### 📦 Classificação dos Softwares
+                - **Sistemas Operacionais:** Gerenciam hardware e arquivos (Windows, Linux, macOS).
+                - **Aplicativos:** Programas orientados a tarefas do usuário (Excel, Word, navegadores).
+                - **Firmware:** Software gravado permanentemente em circuitos eletrônicos (como a BIOS/UEFI da placa-mãe).
+                - **Freeware:** Softwares 100% gratuitos para uso livre.
+                - **Shareware:** Softwares distribuídos para demonstração com algumas funções limitadas.
+                - **Abandonware:** Softwares descontinuados que não possuem mais suporte comercial.
+                """
+            )
+        with c_f2:
+            st.markdown(
+                """
+                #### 🧠 Arquitetura: Processamento e Memórias
+                - **Entrada (Input):** Envia dados para a CPU (teclado, mouse, scanner).
+                - **CPU (Processador):** Possui a Unidade Lógica e Aritmética (ULA) e executa os cálculos.
+                - **Memória RAM:** Acesso aleatório ultrarrápido; volátil (apaga tudo ao desligar o computador).
+                - **Memória ROM:** Memória não volátil que permite apenas a leitura dos programas de inicialização.
+                - **Memória Cache:** Memória de alta velocidade integrada na CPU para acelerar a troca de dados.
+                - **Armazenamento:** Salva os arquivos permanentemente (HD, SSD, Pen Drive/Flash Disk).
+                """
+            )
+            
+        st.markdown("---")
+        st.markdown("#### 📏 Escala de Medidas: Capacidade e Velocidade")
+        col_m1, col_m2 = st.columns(2)
+        with col_m1:
+            st.markdown(
+                """
+                | Unidade de Capacidade | Equivalência Real |
+                | :--- | :--- |
+                | **1 Bit** | Menor unidade (0 ou 1) |
+                | **1 Byte** | 8 Bits (representa 1 caractere: 'A', '1') |
+                | **1 Kilobyte (KB)** | 1.024 Bytes |
+                | **1 Megabyte (MB)** | 1.024 Kilobytes |
+                | **1 Gigabyte (GB)** | 1.024 Megabytes |
+                | **1 Terabyte (TB)** | 1.024 Gigabytes |
+                | **1 Petabyte (PB)** | 1.024 Terabytes |
+                """
+            )
+        with col_m2:
+            st.markdown(
+                """
+                | Unidade de Velocidade (Frequência) | Ciclos por Segundo |
+                | :--- | :--- |
+                | **1 Hertz (Hz)** | 1 ciclo ou oscilação por segundo |
+                | **1 Kilohertz (KHz)** | 1.000 ciclos por segundo |
+                | **1 Megahertz (MHz)** | 1.000.000 de ciclos por segundo |
+                | **1 Gigahertz (GHz)** | 1.000.000.000 de ciclos por segundo |
+                
+                *Curiosidade: O processador de um computador moderno opera a 3.0 até 5.0 GHz, ou seja, realiza até 5 bilhões de operações a cada segundo!*
+                """
+            )
+
+    with tab2:
         st.markdown("### 🏢 Recursos Oficiais Microsoft")
         st.write("Acesse os portais oficiais de capacitação e documentação técnica da Microsoft:")
         
@@ -62,7 +132,7 @@ def render_biblioteca_page():
                 """
             )
             
-    with tab2:
+    with tab3:
         st.markdown("### 🧠 Engenharia de Prompts e Inteligência Artificial")
         st.write("Aprenda as técnicas mais avançadas para instruir modelos de linguagem (LLMs):")
         
@@ -86,7 +156,7 @@ def render_biblioteca_page():
                 """
             )
 
-    with tab3:
+    with tab4:
         st.markdown("### ⚖️ Ética, Privacidade e Lei Geral de Proteção de Dados (LGPD)")
         st.write("Diretrizes vitais para o uso responsável da tecnologia em ambientes corporativos:")
         
@@ -105,7 +175,7 @@ def render_biblioteca_page():
             "Se for pedir auxílio à IA, utilize sempre nomes e valores fictícios ou passe apenas o cabeçalho das colunas!"
         )
 
-    with tab4:
+    with tab5:
         st.markdown("### 📂 Planilhas de Exemplo e Dados Abertos para Treino")
         st.write("Bases de dados para você importar no Excel e praticar fórmulas, tabelas e gráficos:")
         
@@ -154,7 +224,7 @@ def render_biblioteca_page():
             )
             st.caption("Arquivo separado por ponto e vírgula (`;`), pronto para abrir diretamente no Excel.")
 
-    with tab5:
+    with tab6:
         st.markdown("### 🏛️ Os Pioneiros da Computação (Nossas Senhas do Conhecimento)")
         st.write("Conheça as histórias fascinantes das mentes que tornaram possíveis os computadores e a Inteligência Artificial:")
         

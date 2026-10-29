@@ -2,10 +2,11 @@
 Módulo 2: Gerenciamento de Objetos do Excel & Estruturação com IA.
 Conteúdos e Práticas:
 - Células, Endereçamento, Linhas, Colunas, Formatação, Filtros e Opções de Colagem
+- Evolução das Dimensões do Excel e Tipos de Dados (Constantes vs Calculados)
+- Validação de Dados (Listas Suspensas) e Proteção de Fórmulas
 - Planilhas e Pasta de Trabalho
 - Formatação como Tabela oficial e integração com Power Apps
 - Prompts de IA para geração de estruturas de planilhas formatadas
-- Comparativo: Tempo de prompt vs Tempo de execução manual
 - Bateria expandida de exercícios práticos e auditoria
 """
 
@@ -27,58 +28,128 @@ def render_modulo2_page():
     info = MODULES_INFO["modulo2"]
     render_header(
         title=info["title"],
-        subtitle="Células, linhas, colunas, tabelas estruturadas, integração de dados e IA para geração de estruturas.",
+        subtitle="Células, dimensões, tipos de dados, validação, proteção de fórmulas, tabelas oficiais e geração por IA.",
         icon=info["icon"]
     )
     
     render_pioneer_badge(info["pioneer"], info["bio"])
     
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "1. Células & Formatação",
-        "2. Pastas & Planilhas",
-        "3. Tabelas Oficiais & Power Apps",
-        "4. Prompts de Geração de Estruturas",
-        "5. Bateria de Exercícios & Prática"
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+        "1. Células, Dimensões & Tipos",
+        "2. Validação & Proteção",
+        "3. Pastas & Planilhas",
+        "4. Tabelas Oficiais & Power Apps",
+        "5. Prompts de Estruturação",
+        "6. Bateria de Exercícios"
     ])
     
     with tab1:
-        st.markdown("### 2.1 — O Coração do Excel: Células e Endereçamento")
+        st.markdown("### 2.1 — O Coração do Excel: Células, Endereçamento e Tipos de Dados")
         st.write(
             "Toda a mecânica do Microsoft Excel baseia-se em uma grade bidimensional inteligente. "
-            "Compreender a anatomia dos objetos é essencial para não cometer erros em fórmulas:"
+            "Compreender a anatomia dos objetos e os tipos de dados é essencial para evitar falhas em fórmulas:"
         )
         
         c1, c2 = st.columns(2)
         with c1:
             st.markdown(
                 """
-                - 📌 **Endereçamento:** A interseção entre uma **Coluna** (letra) e uma **Linha** (número). Exemplo: `C5` é a coluna C na linha 5.
-                - ➕ **Inserir e Remover:** 
-                  - Inserir linha: selecione a linha e tecle `Ctrl + Shift + +`
-                  - Excluir linha: selecione a linha e tecle `Ctrl + -`
-                - 🎨 **Formatos de Número:**
-                  - **Geral:** Padrão inicial sem separadores fixos.
-                  - **Moeda / Contábil:** Insere o símbolo monetário (ex: `R$ 1.250,00`) e alinha os decimais.
-                  - **Data:** Converte o número de série em formato civil (ex: `29/10/2026`).
+                #### 📌 Endereçamento e Dimensões
+                - **Endereço da Célula:** A interseção entre uma **Coluna** (letra) e uma **Linha** (número). Ex: `C5`.
+                - **A Fantástica Evolução da Capacidade:**
+                  - *Versões Anteriores (até 2003):* 256 colunas $\\times$ 65.536 linhas = **16.777.216 células**.
+                  - *Versões Modernas (2007 até Microsoft 365):* 16.384 colunas $\\times$ 1.048.576 linhas = **mais de 17 BILHÕES de células**!
+                - **Inserir e Remover Linhas/Colunas:** 
+                  - Inserir: selecione e tecle `Ctrl + Shift + +`
+                  - Excluir: selecione e tecle `Ctrl + -`
                 """
             )
         with c2:
             st.markdown(
                 """
-                - 📋 **Opções Especiais de Colagem (`Colar Especial`):**
-                  - **Colar Valores:** Elimina fórmulas e preserva apenas o resultado numérico final (crucial para auditar planilhas).
-                  - **Colar Fórmulas:** Mantém a matemática mas não altera a cor ou formatação de destino.
-                  - **Transpor:** Converte dados dispostos em linhas para colunas e vice-versa.
-                - 🔍 **Filtros e Ordenação:**
-                  - Classificar de `A a Z` ou do `Maior para o Menor`.
-                  - Filtrar dados para exibir somente registros que atendem a um critério.
+                #### 🏷️ Os 2 Grandes Tipos de Dados
+                1. **Dados Constantes (Entrada Direta):**
+                   - **Texto:** Ex: `"Parafuso Aço"`, `"São Paulo"` (alinhado à esquerda por padrão).
+                   - **Número:** Ex: `1250`, `45,90` (alinhado à direita por padrão).
+                   - **Data:** Ex: `29/10/2026` (armazenado internamente como número de série).
+                   - **Hora:** Ex: `14:30:00` (fração de um dia de 24 horas).
+                2. **Dados Calculados (Fórmulas e Funções):**
+                   - Começam sempre com o sinal de igualdade (`=`) e reagem dinamicamente quando as células de origem são alteradas.
                 """
+            )
+            
+        st.markdown("---")
+        st.markdown("#### 📋 Opções Especiais de Colagem (`Colar Especial`)")
+        st.write(
+            "Dominar o Colar Especial poupa horas de retrabalho e evita desastres em relatórios:"
+        )
+        col_c1, col_c2, col_c3 = st.columns(3)
+        with col_c1:
+            st.info(
+                "**1. Colar Valores:**\n\n"
+                "Elimina a fórmula matemática e grava apenas o número estático final. Imprescindível para auditar planilhas e evitar erros `#REF!`."
+            )
+        with col_c2:
+            st.info(
+                "**2. Colar Fórmulas:**\n\n"
+                "Copia a lógica matemática sem herdar a cor, bordas ou preenchimentos da célula de origem."
+            )
+        with col_c3:
+            st.info(
+                "**3. Transpor:**\n\n"
+                "Gira a orientação da tabela: o que estava organizado em colunas vira linhas, e vice-versa, com 1 clique!"
             )
 
     with tab2:
-        st.markdown("### 2.2 e 2.3 — Planilhas e Pasta de Trabalho")
+        st.markdown("### 2.2 — Validação de Dados & Proteção de Fórmulas")
         st.write(
-            "É comum confundir os termos 'Pasta de Trabalho' e 'Planilha'. No padrão corporativo:"
+            "Dois dos recursos profissionais mais importantes ensinados em cursos corporativos são a **blindagem de digitação** "
+            "e a **proteção contra exclusão acidental de fórmulas**:"
+        )
+        
+        col_v1, col_v2 = st.columns(2)
+        with col_v1:
+            st.markdown(
+                """
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 1.2rem; border-radius: 8px;">
+                    <h4 style="color: #005A9C; margin-top: 0;">🛡️ Validação de Células (Listas Suspensas)</h4>
+                    <p style="font-size: 0.92rem; color: #334155;">
+                        Evita que operadores digitem nomes errados ou valores fora do padrão aceitável.
+                    </p>
+                    <ul style="font-size: 0.88rem; color: #475569; padding-left: 1.1rem;">
+                        <li><strong>Como fazer:</strong> Menu <code>Dados</code> &rarr; <code>Validação de Dados</code>.</li>
+                        <li><strong>Permitir Lista:</strong> Digite os itens separados por ponto e vírgula: <code>Ativo;Inativo;Manutenção</code>. Uma setinha suspensa aparecerá na célula!</li>
+                        <li><strong>Permitir Número Inteiro:</strong> Exige que o valor esteja, por exemplo, entre <code>1</code> e <code>100</code>.</li>
+                        <li><strong>Mensagem de Erro:</strong> Configure uma mensagem personalizada de bloqueio quando o usuário tentar burlar a regra.</li>
+                    </ul>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+        with col_v2:
+            st.markdown(
+                """
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 1.2rem; border-radius: 8px;">
+                    <h4 style="color: #005A9C; margin-top: 0;">🔒 O Segredo da Proteção de Planilha</h4>
+                    <p style="font-size: 0.92rem; color: #334155;">
+                        Como permitir que o funcionário preencha apenas os dados de entrada sem conseguir alterar suas fórmulas:
+                    </p>
+                    <ol style="font-size: 0.88rem; color: #475569; padding-left: 1.1rem;">
+                        <li>Por padrão, todas as células do Excel vêm com o atributo "Bloqueada" ativado (mas ele só funciona se a planilha for protegida).</li>
+                        <li><strong>Passo 1:</strong> Selecione apenas as células onde o usuário <em>PODE</em> digitar (ex: colunas de Nome e Quantidade).</li>
+                        <li><strong>Passo 2:</strong> Clique com o botão direito &rarr; <code>Formatar Células</code> &rarr; aba <code>Proteção</code> &rarr; <strong>DESMARQUE</strong> a caixa "Bloqueada".</li>
+                        <li><strong>Passo 3:</strong> Vá no menu <code>Revisão</code> (ou Ferramentas) &rarr; <code>Proteger Planilha</code> &rarr; digite uma senha.</li>
+                        <li><strong>Resultado:</strong> Suas fórmulas ficam blindadas e o usuário só consegue clicar e preencher nos campos liberados!</li>
+                    </ol>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+    with tab3:
+        st.markdown("### 2.3 — Planilhas e Pasta de Trabalho")
+        st.write(
+            "No padrão corporativo, a hierarquia de documentos funciona da seguinte forma:"
         )
         
         col1, col2 = st.columns(2)
@@ -102,7 +173,7 @@ def render_modulo2_page():
             """
         )
 
-    with tab3:
+    with tab4:
         st.markdown("### 2.4 — O Poder das Tabelas Oficiais do Excel (`Ctrl + T`)")
         st.write(
             "Muitos usuários apenas pintam as células com cores e acham que criaram uma tabela. "
@@ -124,7 +195,7 @@ def render_modulo2_page():
             "e facilita o entendimento da IA ao ler seus dados."
         )
 
-    with tab4:
+    with tab5:
         st.markdown("### 6.1 — Engenharia de Prompts para Criação de Estruturas de Planilhas")
         st.write(
             "Uma das maneiras mais eficientes de usar IA é solicitar a **estrutura completa da planilha** "
@@ -152,9 +223,9 @@ def render_modulo2_page():
             "restando a você mais 2 minutos apenas para auditar e formatar no Excel. Ganho de **80% de produtividade**!"
         )
 
-    with tab5:
+    with tab6:
         st.markdown("### 🧪 Bateria de Exercícios Práticos: Gerenciamento de Objetos")
-        st.write("Resolva os desafios abaixo para consolidar seu domínio prático sobre células, formatações e tabelas:")
+        st.write("Resolva os desafios abaixo para consolidar seu domínio prático sobre células, formatações, validação e proteção:")
         
         # EXERCÍCIO 1
         with st.expander("📊 Exercício 1: Desafio de Estruturação com IA (Controle de Estoque)", expanded=True):
@@ -211,10 +282,25 @@ def render_modulo2_page():
                     st.error("⚠️ **Incorreto!** Usar Ctrl + V comum tentará buscar os vínculos na rede externa, gerando o temido erro `#REF!` no computador do cliente.")
 
         # EXERCÍCIO 3
+        with st.expander("🛡️ Exercício 3: Blindagem de Fórmulas e Proteção de Planilha", expanded=False):
+            st.markdown(
+                """
+                **Desafio:** Você construiu uma calculadora de custos no Excel cheia de fórmulas em `D2:D50`. Usuários precisam digitar apenas as quantidades em `C2:C50`.  
+                Para que eles não consigam apagar as fórmulas por engano, qual é a sequência correta?
+                """
+            )
+            st.info(
+                "**Sequência Técnica Correta:**\n"
+                "1. Selecione `C2:C50` (onde o usuário digita) &rarr; `Formatar Células` &rarr; `Proteção` &rarr; **Desmarque 'Bloqueada'**.\n"
+                "2. Vá em `Revisão` &rarr; `Proteger Planilha` e defina uma senha.\n"
+                "Agora as fórmulas continuam travadas e seguras, e os dados de entrada podem ser digitados normalmente!"
+            )
+
+        # EXERCÍCIO 4
         st.markdown("---")
         render_anti_hallucination_quiz(
             key="m2_quiz1",
-            question="**Exercício 3 (Quiz de Objetos):** Você precisa transformar uma lista comum de clientes em uma Tabela Oficial do Excel com filtros nativos e expansão dinâmica automática. Qual é o atalho de teclado mais rápido no padrão brasileiro do Excel?",
+            question="**Exercício 4 (Quiz de Objetos):** Você precisa transformar uma lista comum de clientes em uma Tabela Oficial do Excel com filtros nativos e expansão dinâmica automática. Qual é o atalho de teclado mais rápido no padrão brasileiro do Excel?",
             options=[
                 "Ctrl + C",
                 "Ctrl + T (ou Ctrl + Alt + T dependendo da versão)",
@@ -225,31 +311,31 @@ def render_modulo2_page():
             explanation="O atalho `Ctrl + T` (ou `Ctrl + Alt + T`) seleciona todo o bloco contíguo de dados e abre instantaneamente a caixa 'Criar Tabela', ativando filtros e cabeçalhos oficiais."
         )
 
-        # EXERCÍCIO 4
+        # EXERCÍCIO 5
         st.markdown("---")
         render_anti_hallucination_quiz(
             key="m2_quiz2",
-            question="**Exercício 4 (Quiz de Integração & IA):** Por que o Microsoft Copilot e o Microsoft Power Apps exigem que os dados de uma planilha estejam formatados formalmente como 'Tabela'?",
+            question="**Exercício 5 (Quiz de Dimensões e Integração):** Quantas linhas e colunas possui uma planilha moderna do Excel (a partir da versão 2007 e Microsoft 365)?",
             options=[
-                "Porque o Excel não aceita cores em células que não são tabelas.",
-                "Porque a formatação como Tabela cria um esquema estruturado com nomes de colunas e tipos de dados indexados, permitindo que a IA e aplicativos externos leiam e gravem registros de forma confiável.",
-                "Porque tabelas comuns gastam 10 vezes mais memória RAM.",
-                "É apenas uma exigência estética sem efeito técnico."
+                "256 colunas e 65.536 linhas",
+                "16.384 colunas e 1.048.576 linhas (mais de 17 bilhões de células)",
+                "100 colunas e 1.000 linhas",
+                "Linhas e colunas infinitas limitadas apenas pela velocidade da internet"
             ],
             correct_index=1,
-            explanation="Tabelas nomeadas criam objetos com cabeçalhos reconhecíveis por APIs e LLMs (como o Copilot e o conector do Power Apps), evitando erros de referência solta."
+            explanation="Desde a versão 2007 (formato .xlsx), o Excel expandiu sua grade para exatamente 16.384 colunas (da coluna A até XFD) e 1.048.576 linhas, comportando mais de 17 bilhões de células!"
         )
 
-        # EXERCÍCIO 5
+        # EXERCÍCIO 6
         st.markdown("---")
-        st.markdown("#### 📂 Exercício 5: Prática com Arquivo para Download")
+        st.markdown("#### 📂 Exercício 6: Prática com Arquivo para Download")
         st.write("Baixe a planilha de dados brutos abaixo, abra no Excel e execute as seguintes instruções:")
         st.markdown(
             """
             1. Converta o intervalo em **Tabela Oficial** (`Ctrl + T`).
             2. Renomeie a tabela para `Tbl_Manutencao_Equipamentos`.
-            3. Classifique a coluna `Horas_Uso` do **Maior para o Menor**.
-            4. Filtre para exibir apenas o setor de **Usinagem**.
+            3. Crie uma **Validação de Dados** na coluna `Status` permitindo apenas a lista: `Operacional;Manutenção;Alerta`.
+            4. Classifique a coluna `Horas_Uso` do **Maior para o Menor**.
             """
         )
         
@@ -267,19 +353,19 @@ def render_modulo2_page():
         exemplo_df.to_csv(csv_buffer, index=False, sep=";")
         
         st.download_button(
-            label="📥 Baixar Planilha para Exercício 5 (CSV)",
+            label="📥 Baixar Planilha para Exercício 6 (CSV)",
             data=csv_buffer.getvalue().encode("utf-8-sig"),
             file_name="tabela_maquinas_exemplo.csv",
             mime="text/csv",
             key="btn_dl_sample_machines_m2"
         )
 
-        # EXERCÍCIO 6
+        # EXERCÍCIO 7
         st.markdown("---")
-        st.markdown("#### 🧪 Exercício 6: Laboratório Interativo de Prompts")
+        st.markdown("#### 🧪 Exercício 7: Laboratório Interativo de Prompts")
         render_prompt_sandbox(
             module_name="Módulo 2: Gerenciamento de Objetos",
-            placeholder="Exemplo: Crie a estrutura de colunas para uma planilha de controle de compras corporativas..."
+            placeholder="Exemplo: Crie a estrutura de colunas e dados fictícios para controle de compras industriais..."
         )
 
     render_footer()

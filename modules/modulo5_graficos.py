@@ -1,10 +1,12 @@
 """
-Módulo 5: Gerenciamento de Gráficos & Storytelling com IA.
+Módulo 5: Gerenciamento de Gráficos, Análise de Negócios & Automação VBA com IA.
 Conteúdos e Práticas:
 - Tipos de gráficos e seus objetivos (Colunas/Barras, Pizza, Dispersão XY)
 - Inserir gráficos e formatar layout (Legendas, Títulos, Eixos e Cores)
-- Prompts de IA para escolha do gráfico ideal em função dos dados
-- Prompts de IA para análise de resultados e extração de insights de negócios
+- Tabelas Dinâmicas, Gráficos Dinâmicos e Subtotais
+- Análise de Decisão: Atingir Meta (Goal Seek) e Cenários
+- Bônus Especial: Automação com Macros e Códigos VBA gerados por IA
+- Prompts de IA para escolha de gráfico, storytelling e automação VBA
 - Bateria expandida de exercícios práticos e auditoria
 """
 
@@ -26,18 +28,19 @@ def render_modulo5_page():
     info = MODULES_INFO["modulo5"]
     render_header(
         title=info["title"],
-        subtitle="Gráficos de barras, pizza, dispersão XY, formatação de layout e análise de insights com IA.",
+        subtitle="Gráficos, dashboards, Tabelas Dinâmicas, Atingir Meta, Storytelling e Automação VBA com IA.",
         icon=info["icon"]
     )
     
     render_pioneer_badge(info["pioneer"], info["bio"])
     
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
         "1. Tipos de Gráficos & Objetivos",
         "2. Formatação de Layout",
-        "3. IA para Escolha do Gráfico",
-        "4. IA para Insights & Storytelling",
-        "5. Bateria de Exercícios & Prática"
+        "3. Tabelas Dinâmicas & Atingir Meta",
+        "4. Bônus: Macros e VBA com IA",
+        "5. IA para Storytelling & Prompts",
+        "6. Bateria de Exercícios"
     ])
     
     with tab1:
@@ -109,56 +112,151 @@ def render_modulo5_page():
         )
 
     with tab3:
-        st.markdown("### 6.4 — Prompts de IA para Auxiliar na Geração do Gráfico Ideal")
+        st.markdown("### 5.4 — Análise Avançada: Tabela Dinâmica, Subtotais e Atingir Meta")
         st.write(
-            "Ficou em dúvida sobre qual visual escolher? Descreva suas variáveis para a IA e peça a recomendação de design:"
+            "Para analisar grandes volumes de dados sem precisar escrever dezenas de fórmulas manuais, o Excel oferece ferramentas analíticas de alto nível:"
         )
         
-        render_prompt_card(
-            title="Escolha do Gráfico Ideal em Função dos Dados",
-            prompt_text=(
-                "Atue como especialista em visualização de dados e dashboards no Excel.\n"
-                "Tenho uma tabela com 15 departamentos da empresa e o respectivo orçamento de gastos em reais de cada um.\n\n"
-                "1. Qual é o gráfico mais recomendado pelo padrão de design corporativo para essa comparação?\n"
-                "2. Por que o gráfico de pizza seria uma escolha inadequada para 15 categorias?\n"
-                "3. Quais ajustes de layout (título, eixos, ordenação e cores) devo fazer no Excel para que a diretoria visualize o maior gastador imediatamente?"
-            ),
-            tip_text="O prompt orienta a IA a explicar a razão técnica do design, reforçando seu aprendizado crítico."
-        )
+        col_t1, col_t2 = st.columns(2)
+        with col_t1:
+            st.markdown(
+                """
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 1.2rem; border-radius: 8px;">
+                    <h4 style="color: #005A9C; margin-top: 0;">📊 Tabela Dinâmica (Pivot Table)</h4>
+                    <p style="font-size: 0.92rem; color: #334155;">
+                        Permite cruzar milhares de linhas em segundos arrastando campos para 4 áreas:
+                    </p>
+                    <ul style="font-size: 0.88rem; color: #475569; padding-left: 1.1rem;">
+                        <li><strong>Linhas:</strong> As categorias principais (ex: Vendedor, Produto).</li>
+                        <li><strong>Colunas:</strong> As subdivisões (ex: Região, Meses).</li>
+                        <li><strong>Valores:</strong> Onde ocorrem os cálculos automáticos (Soma de Vendas, Contagem, Média).</li>
+                        <li><strong>Filtros:</strong> Permite segmentar por Filial ou Ano com 1 clique.</li>
+                        <li><strong>Gráfico Dinâmico:</strong> Gráficos conectados diretamente à tabela que se redesenham conforme você filtra!</li>
+                    </ul>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+        with col_t2:
+            st.markdown(
+                """
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 1.2rem; border-radius: 8px;">
+                    <h4 style="color: #005A9C; margin-top: 0;">🎯 Atingir Meta (Goal Seek)</h4>
+                    <p style="font-size: 0.92rem; color: #334155;">
+                        Cálculo reverso: você diz o resultado final que quer alcançar e o Excel descobre quanto você precisa vender!
+                    </p>
+                    <p style="font-size: 0.88rem; color: #475569;">
+                        <strong>Como acionar:</strong> Menu <code>Dados</code> &rarr; <code>Teste de Hipóteses</code> &rarr; <code>Atingir Meta</code>.<br><br>
+                        1. <strong>Definir célula:</strong> A célula com a fórmula do lucro (ex: B10).<br>
+                        2. <strong>Para valor:</strong> Digite a meta (ex: R$ 100.000).<br>
+                        3. <strong>Alternando célula:</strong> A célula da quantidade de vendas (ex: B2).<br>
+                        O Excel roda o cálculo em milissegundos e mostra a resposta exata!
+                    </p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
     with tab4:
-        st.markdown("### 6.5 — Prompts de IA para Auxiliar na Análise de Resultados e Gráficos")
+        st.markdown("### 5.5 — Bônus Especial: Automação com Macros e VBA impulsionados por IA")
         st.write(
-            "Após gerar o gráfico no Excel, a IA Generativa pode atuar como sua analista júnior, "
-            "ajudando a redigir o resumo executivo com os principais **insights** (achados de negócio):"
+            "O **VBA (Visual Basic for Applications)** é o ambiente de programação embutido dentro do Excel. "
+            "Antigamente, era necessário meses de estudo de sintaxe para criar automações. "
+            "Hoje, **a Inteligência Artificial Generativa escreve o código VBA para você em 10 segundos**!"
         )
         
+        c_vba1, c_vba2 = st.columns(2)
+        with c_vba1:
+            st.markdown(
+                """
+                #### ⚙️ O que é uma Macro e Objetos do VBA?
+                - **Macro:** Um conjunto de instruções em código gravadas para executar tarefas repetitivas automaticamente com uma tecla de atalho (`Ctrl + Shift + M`).
+                - **Objetos Fundamentais do VBA:**
+                  - `Range("A1:C10")` : Seleciona ou altera um intervalo de células.
+                  - `ActiveCell` : Manipula a célula atualmente selecionada.
+                  - `Cells(linha, coluna)` : Navega por coordenadas numéricas (ex: `Cells(2, 3)` é a célula C2).
+                  - `ActiveCell.Offset(1, 0)` : Desloca o cursor 1 linha para baixo mantendo a mesma coluna.
+                """
+            )
+        with c_vba2:
+            st.markdown(
+                """
+                #### 🚀 Exemplo de Código VBA Gerado por IA
+                Rotina para limpar e formatar uma planilha automaticamente:
+                ```vba
+                Sub LimparEFormatar()
+                    ' Código gerado via Engenharia de Prompt
+                    With Range("A1:F1")
+                        .Font.Bold = True
+                        .Font.ColorIndex = 2 ' Branco
+                        .Interior.Color = RGB(0, 90, 156) ' Azul Corporativo
+                    End With
+                    Columns("A:F").AutoFit ' Auto-ajuste de largura
+                    MsgBox "Planilha padronizada com sucesso!", vbInformation, "Automação"
+                End Sub
+                ```
+                """
+            )
+            
         render_prompt_card(
-            title="Extração de Insights Analíticos a partir de Resumo Numérico",
+            title="Como pedir para a IA escrever códigos VBA para o Excel",
             prompt_text=(
-                "Atue como consultor de negócios.\n"
-                "Analisei os resultados trimestrais de vendas no Excel e obtive os seguintes números totais:\n"
-                "- 1º Trimestre: R$ 120.000 (meta: R$ 100.000)\n"
-                "- 2º Trimestre: R$ 145.000 (meta: R$ 130.000)\n"
-                "- 3º Trimestre: R$ 90.000 (meta: R$ 140.000)\n"
-                "- 4º Trimestre: R$ 180.000 (meta: R$ 150.000)\n\n"
-                "Necessidade:\n"
-                "1. Identifique o principal ponto de atenção (anomalia) e calcule o percentual de queda do 3º trimestre.\n"
-                "2. Redija 3 tópicos executivos com hipóteses de negócio para explicar essa oscilação aos diretores.\n"
-                "3. Sugira uma recomendação prática de controle para o próximo ano."
+                "Atue como desenvolvedor especialista em Excel e VBA.\n"
+                "Preciso de uma Macro em VBA para fazer o seguinte:\n"
+                "1. Percorrer a coluna D da linha 2 até a linha 50.\n"
+                "2. Se o valor da célula for menor que 10, pintar o fundo da célula de vermelho claro (RGB: 254, 226, 226) e a fonte de vermelho escuro.\n"
+                "3. No final, exibir uma MsgBox informando quantas células foram destacadas.\n"
+                "Comente o código linha por linha para que eu aprenda como funciona."
             ),
-            tip_text="Perceba como transformamos números brutos em storytelling executivo de alto impacto!"
+            tip_text="A IA entrega o código pronto para você abrir no Excel teclando Alt + F11 (Editor VBA), colar em um Módulo e rodar!"
+        )
+
+    with tab5:
+        st.markdown("### 6.4 e 6.5 — Prompts de IA para Storytelling e Visualização")
+        st.write(
+            "Ficou em dúvida sobre qual visual escolher? Descreva suas variáveis para a IA e peça a recomendação de design e storytelling:"
         )
         
+        col1, col2 = st.columns(2)
+        with col1:
+            render_prompt_card(
+                title="Escolha do Gráfico Ideal em Função dos Dados",
+                prompt_text=(
+                    "Atue como especialista em visualização de dados e dashboards no Excel.\n"
+                    "Tenho uma tabela com 15 departamentos da empresa e o respectivo orçamento de gastos em reais de cada um.\n\n"
+                    "1. Qual é o gráfico mais recomendado pelo padrão de design corporativo para essa comparação?\n"
+                    "2. Por que o gráfico de pizza seria uma escolha inadequada para 15 categorias?\n"
+                    "3. Quais ajustes de layout (título, eixos, ordenação e cores) devo fazer no Excel para que a diretoria visualize o maior gastador imediatamente?"
+                ),
+                tip_text="O prompt orienta a IA a explicar a razão técnica do design, reforçando seu aprendizado crítico."
+            )
+        with col2:
+            render_prompt_card(
+                title="Extração de Insights Analíticos a partir de Resumo Numérico",
+                prompt_text=(
+                    "Atue como consultor de negócios.\n"
+                    "Analisei os resultados trimestrais de vendas no Excel e obtive os seguintes números totais:\n"
+                    "- 1º Trimestre: R$ 120.000 (meta: R$ 100.000)\n"
+                    "- 2º Trimestre: R$ 145.000 (meta: R$ 130.000)\n"
+                    "- 3º Trimestre: R$ 90.000 (meta: R$ 140.000)\n"
+                    "- 4º Trimestre: R$ 180.000 (meta: R$ 150.000)\n\n"
+                    "Necessidade:\n"
+                    "1. Identifique o principal ponto de atenção (anomalia) e calcule o percentual de queda do 3º trimestre.\n"
+                    "2. Redija 3 tópicos executivos com hipóteses de negócio para explicar essa oscilação aos diretores.\n"
+                    "3. Sugira uma recomendação prática de controle para o próximo ano."
+                ),
+                tip_text="Perceba como transformamos números brutos em storytelling executivo de alto impacto!"
+            )
+            
         render_audit_alert(
             "Auditoria de Raciocínio Matemático da IA: Modelos de linguagem às vezes cometem erros "
             "ao calcular variações percentuais de cabeça. Sempre verifique o cálculo matemático na sua própria "
             "fórmula do Excel `=(Novo - Antigo) / Antigo` antes de publicar a conclusão no relatório corporativo!"
         )
 
-    with tab5:
-        st.markdown("### 🧪 Bateria de Exercícios Práticos: Gráficos & Storytelling")
-        st.write("Resolva os desafios práticos abaixo para dominar a arte de transformar dados brutos em decisões visuais:")
+    with tab6:
+        st.markdown("### 🧪 Bateria de Exercícios Práticos: Gráficos, Análise & Automação")
+        st.write("Resolva os desafios práticos abaixo para dominar a arte de transformar dados brutos em decisões visuais e automatizadas:")
         
         # EXERCÍCIO 1
         with st.expander("📊 Exercício 1: Laboratório Visual Interativo — Destaque de Categoria", expanded=True):
@@ -201,31 +299,44 @@ def render_modulo5_page():
                 )
 
         # EXERCÍCIO 3
-        with st.expander("📝 Exercício 3: Prompt de Storytelling para a Diretoria", expanded=False):
+        with st.expander("🎯 Exercício 3: O Poder do 'Atingir Meta' (Goal Seek)", expanded=False):
             st.markdown(
                 """
-                **Missão:** Você gerou um gráfico no Excel e precisa enviar um e-mail de 3 linhas para o diretor geral resumindo o que aconteceu no mês.  
-                Crie um prompt pedindo à IA para sintetizar os números sem jargões desnecessários:
+                **Cenário de Planejamento:** Você vende cursos a R$ 250,00 cada. Seus custos fixos mensais são R$ 8.000,00.  
+                A célula `C10` calcula o lucro líquido com a fórmula `=(Quantidade * 250) - 8000`.  
+                Você precisa saber exatamente quantos cursos deve vender para atingir **R$ 30.000,00 de lucro**.
+                
+                Como configurar a caixa do **Atingir Meta** no Excel?
                 """
             )
-            ex3_p = st.text_area(
-                "Escreva seu prompt de storytelling:",
-                key="ex_m5_story_prompt",
-                placeholder="Atue como consultor executivo. Tenho os seguintes números no Excel... Redija 3 bullets acionáveis para o diretor..."
+            st.info(
+                "**Configuração do Atingir Meta:**\n"
+                "- **Definir célula:** `C10`\n"
+                "- **Para valor:** `30000`\n"
+                "- **Alternando célula:** Célula da Quantidade de Cursos.\n"
+                "O Excel calcula em 1 segundo: você precisa vender exatamente **152 cursos**!"
             )
-            if st.button("Ver Sugestão do Exercício 3", key="btn_ex_m5_3"):
-                st.info(
-                    "**Dica de Engenharia de Prompt:** Peça sempre para a IA destacar:  \n"
-                    "1. O que foi bom (+).  \n"
-                    "2. Onde está o perigo/gargalo (-).  \n"
-                    "3. Qual é a recomendação prática para a próxima semana (ação)."
-                )
 
         # EXERCÍCIO 4
+        with st.expander("🤖 Exercício 4: Automação com Macro & IA (Desafio Prático)", expanded=False):
+            st.markdown(
+                """
+                **Desafio:** Crie um prompt para a IA gerar uma Macro em VBA que crie um botão de 'Limpar Dados' na planilha, apagando o conteúdo do intervalo `B2:D20` sem apagar as cores de formatação.
+                """
+            )
+            st.code(
+                'Sub LimparDados()\n'
+                '    Range("B2:D20").ClearContents \' Limpa apenas os valores, preservando cores e bordas\n'
+                '    MsgBox "Campos de entrada limpos com sucesso!", vbInformation, "Limpeza"\n'
+                'End Sub',
+                language="vba"
+            )
+
+        # EXERCÍCIO 5
         st.markdown("---")
         render_anti_hallucination_quiz(
             key="m5_quiz1",
-            question="**Exercício 4 (Quiz Anti-Alucinação):** Uma IA sugeriu criar um gráfico de pizza para comparar o faturamento diário de uma loja ao longo de todos os 365 dias do ano. Qual é a avaliação técnica correta sobre essa recomendação?",
+            question="**Exercício 5 (Quiz Anti-Alucinação):** Uma IA sugeriu criar um gráfico de pizza para comparar o faturamento diário de uma loja ao longo de todos os 365 dias do ano. Qual é a avaliação técnica correta sobre essa recomendação?",
             options=[
                 "A recomendação é excelente, pois a pizza divide perfeitamente os 365 dias em 100%.",
                 "A recomendação é um erro grave de visualização; um gráfico de linhas contínuo ou colunas mensais é a escolha técnica correta.",
@@ -236,27 +347,27 @@ def render_modulo5_page():
             explanation="Uma pizza com 365 fatias geraria uma mancha ilegível e incompreensível. Acompanhamento de tempo contínuo exige gráficos de LINHAS ou agregação em colunas mensais."
         )
 
-        # EXERCÍCIO 5
+        # EXERCÍCIO 6
         st.markdown("---")
         render_anti_hallucination_quiz(
             key="m5_quiz2",
-            question="**Exercício 5 (Quiz de Design):** Por que as boas práticas de design corporativo recomendam remover a legenda de um gráfico que possui apenas uma única série de colunas (ex: apenas o faturamento de 2026)?",
+            question="**Exercício 6 (Quiz de Tabela Dinâmica):** Em uma Tabela Dinâmica do Excel, onde você deve arrastar o campo 'Faturamento em R$' para que o Excel calcule automaticamente a soma monetária de todas as vendas?",
             options=[
-                "Porque o Excel trava se você deixar a legenda.",
-                "Porque a legenda é redundante (o título já diz o que é o dado) e rouba espaço útil que poderia tornar as colunas maiores e mais legíveis.",
-                "Porque a legenda consome muita tinta na impressão.",
-                "Porque o padrão internacional exige legenda sempre no centro da tela."
+                "Para a área de Filtros",
+                "Para a área de Valores (Somatório de Valores)",
+                "Para a área de Colunas",
+                "Para a lixeira do Excel"
             ],
             correct_index=1,
-            explanation="Princípio do 'Data-to-Ink Ratio': Todo elemento que não adiciona informação nova deve ser removido. Se o título já diz 'Faturamento 2026', ter uma legenda escrito 'Faturamento 2026' é desperdício de espaço."
+            explanation="A área de 'Valores' é o coração do cálculo na Tabela Dinâmica; qualquer coluna numérica arrastada para lá recebe automaticamente operações de Soma, Média ou Contagem."
         )
 
-        # EXERCÍCIO 6
+        # EXERCÍCIO 7
         st.markdown("---")
-        st.markdown("#### 🧪 Exercício 6: Laboratório de Prompts & Storytelling")
+        st.markdown("#### 🧪 Exercício 7: Laboratório de Prompts & Storytelling")
         render_prompt_sandbox(
             module_name="Módulo 5: Gráficos e Storytelling",
-            placeholder="Exemplo: Tenho uma tabela com dados de pesquisa de satisfação de clientes (notas de 1 a 5). Qual o melhor gráfico?"
+            placeholder="Exemplo: Crie um código VBA para destacar linhas com vendas negativas..."
         )
 
     render_footer()
