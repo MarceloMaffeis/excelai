@@ -125,7 +125,7 @@ def render_biblioteca_page():
         with col2:
             st.markdown(
                 """
-                - 🤖 [Guia de Primeiros Passos com Microsoft Copilot no Excel](https://support.microsoft.com/pt-br/office/come%C3%A7ar-a-usar-o-copilot-no-excel-ca165275-520e-400a-b3a6-8968984954a6)
+                - 🤖 [Guia de Primeiros Passos com Microsoft Copilot no Excel](https://support.microsoft.com/pt-br/excel/copilot/get-started-with-copilot-in-excel)
                   *Aprenda como a Microsoft recomenda pedir ajuda à IA para analisar tendências e gerar novas colunas.*
                 - 📱 [Integração de Tabelas do Excel com Power Apps](https://learn.microsoft.com/pt-br/power-apps/maker/canvas-apps/connections/connection-excel)
                   *Como formatar sua tabela de dados no Excel para utilizá-la como banco de dados em aplicativos corporativos.*
