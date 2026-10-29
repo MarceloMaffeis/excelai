@@ -43,9 +43,6 @@ with st.sidebar:
             <h2 style="color: #005A9C; margin: 0.2rem 0 0 0; font-size: 1.35rem; font-weight: 800;">
                 Excel + IA Generativa
             </h2>
-            <div style="font-size: 0.85rem; color: #64748B; font-weight: 600;">
-                Formação Profissional • 20 Horas
-            </div>
         </div>
         """,
         unsafe_allow_html=True

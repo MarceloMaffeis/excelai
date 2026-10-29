@@ -5,6 +5,7 @@ Conteúdos e Práticas:
 - Escalas de cor, barras de dados e conjuntos de ícones
 - Gerenciamento de regras (editar, prioridade, parar se verdadeiro e excluir)
 - Prompts de IA para definição de esquemas de formatação condicional
+- Bateria expandida de exercícios práticos e auditoria
 """
 
 import streamlit as st
@@ -35,7 +36,7 @@ def render_modulo4_page():
         "2. Escalas de Cor & Ícones",
         "3. Gerenciar Regras",
         "4. Prompts de Formatação",
-        "5. Visualizador & Desafio"
+        "5. Bateria de Exercícios & Prática"
     ])
     
     with tab1:
@@ -138,46 +139,108 @@ def render_modulo4_page():
         )
 
     with tab5:
-        st.markdown("### 🧪 Visualizador Interativo de Regras Condicionais")
-        st.write("Veja como a tabela abaixo destaca automaticamente desempenhos com base em regras de realce:")
+        st.markdown("### 🧪 Bateria de Exercícios Práticos: Formatação Condicional")
+        st.write("Resolva os exercícios abaixo para se tornar especialista em regras de destaque visual e auditoria:")
         
-        vendas_df = pd.DataFrame({
-            "Vendedor": ["Lucas Mendes", "Camila Silva", "Rafael Santos", "Juliana Lima", "Bruno Souza"],
-            "Meta_R$": [50000, 50000, 50000, 50000, 50000],
-            "Realizado_R$": [62000, 48500, 31000, 74000, 49900],
-            "Atingimento_%": [124.0, 97.0, 62.0, 148.0, 99.8]
-        })
-        
-        # Estilização visual interativa usando pandas styler
-        def highlight_meta(val):
-            if val >= 100.0:
-                return "background-color: #DEF7EC; color: #03543F; font-weight: bold;"
-            elif val >= 80.0:
-                return "background-color: #FEF08A; color: #854D0E;"
-            else:
-                return "background-color: #FEE2E2; color: #991B1B; font-weight: bold;"
-                
-        styled_df = vendas_df.style.applymap(highlight_meta, subset=["Atingimento_%"])
-        st.dataframe(styled_df, use_container_width=True)
-        
-        # Desafio Anti-Alucinação
+        # EXERCÍCIO 1
+        with st.expander("🚦 Exercício 1: Simulação Interativa — Semáforo de Desempenho", expanded=True):
+            st.markdown(
+                """
+                Observe a tabela dinâmica abaixo. As células da coluna `Atingimento_%` mudam de cor automaticamente 
+                conforme a regra:
+                - 🟢 **Acima de 100%:** Verde suave (meta superada)
+                - 🟡 **Entre 80% e 99.9%:** Amarelo suave (atenção/recuperável)
+                - 🔴 **Abaixo de 80%:** Vermelho claro (crítico/ação necessária)
+                """
+            )
+            vendas_df = pd.DataFrame({
+                "Vendedor": ["Lucas Mendes", "Camila Silva", "Rafael Santos", "Juliana Lima", "Bruno Souza", "Patrícia Gomes"],
+                "Meta_R$": [50000, 50000, 50000, 50000, 50000, 50000],
+                "Realizado_R$": [62000, 48500, 31000, 74000, 49900, 28000],
+                "Atingimento_%": [124.0, 97.0, 62.0, 148.0, 99.8, 56.0]
+            })
+            
+            def highlight_meta(val):
+                if val >= 100.0:
+                    return "background-color: #DEF7EC; color: #03543F; font-weight: bold;"
+                elif val >= 80.0:
+                    return "background-color: #FEF08A; color: #854D0E;"
+                else:
+                    return "background-color: #FEE2E2; color: #991B1B; font-weight: bold;"
+                    
+            styled_df = vendas_df.style.applymap(highlight_meta, subset=["Atingimento_%"])
+            st.dataframe(styled_df, use_container_width=True)
+            
+            st.caption("No Excel real, você cria essas três regras selecionando a coluna -> 'Formatação Condicional' -> 'Regras de Realce das Células'.")
+
+        # EXERCÍCIO 2
+        with st.expander("📅 Exercício 2: Monitoramento de Vencimentos e Prazos", expanded=False):
+            st.markdown(
+                """
+                **Cenário:** Você gerencia uma planilha com 200 faturas a receber. A coluna `Vencimento` contém datas.  
+                Qual recurso da Formatação Condicional permite que faturas vencidas no passado ou que vencem na data de hoje fiquem destacadas automaticamente sem que você precise digitar fórmulas complexas?
+                """
+            )
+            st.info(
+                "**Solução no Excel:**\n"
+                "1. Selecione as células de datas.\n"
+                "2. Vá em **Formatação Condicional** -> **Regras de Realce das Células** -> **Uma Data que Ocorre...**\n"
+                "3. Selecione a opção **'Hoje'** ou **'Ontem'** e escolha o preenchimento vermelho claro.\n"
+                "4. Toda vez que você abrir o Excel em um novo dia, o sistema recalculará as datas automaticamente!"
+            )
+
+        # EXERCÍCIO 3
+        with st.expander("🔍 Exercício 3: Detecção de Cadastros Duplicados", expanded=False):
+            st.markdown(
+                """
+                **Problema de Integridade:** No cadastro de clientes, dois operadores inseriram o mesmo cliente com variações no nome, mas com o mesmo número de CPF.  
+                Como identificar visualmente esse erro em 2 segundos?
+                """
+            )
+            st.info(
+                "**Passo a Passo Oficial:**\n"
+                "1. Clique no cabeçalho da coluna de **CPF** para selecionar a coluna inteira.\n"
+                "2. Clique em **Formatação Condicional** -> **Regras de Realce das Células** -> **Valores Duplicados...**\n"
+                "3. Clique em **OK**.\n"
+                "Todas as linhas com CPFs repetidos ficarão imediatamente destacadas em vermelho!"
+            )
+
+        # EXERCÍCIO 4
+        st.markdown("---")
         render_anti_hallucination_quiz(
-            key="m4_quiz",
-            question="**Cenário de Auditoria:** Você precisa aplicar uma regra de formatação condicional para encontrar se existem códigos de clientes duplicados em uma lista de 500 linhas. Qual recurso nativo do Excel faz isso em um clique?",
+            key="m4_quiz_prec",
+            question="**Exercício 4 (Quiz de Gerenciamento):** Uma célula possui duas regras condicionais aplicadas: Regra 1 (pinta de verde se for > 100) e Regra 2 (pinta de amarelo se for > 50). Se o valor da célula for 150, qual cor ela assumirá se a Regra 1 estiver no topo da lista?",
             options=[
-                "Formatação Condicional -> Escalas de Cor -> Vermelho",
-                "Formatação Condicional -> Regras de Realce das Células -> Valores Duplicados",
-                "Formatação Condicional -> Barra de Dados -> Gradiente",
-                "Inserir -> Tabela Dinâmica de Duplicados"
+                "Verde, pois a regra do topo tem maior precedência e é processada primeiro.",
+                "Amarelo, pois 50 é menor que 100.",
+                "Ficará listrada de verde e amarelo.",
+                "O Excel travará por erro de loop infinito."
+            ],
+            correct_index=0,
+            explanation="No gerenciador de regras do Excel, as condições são avaliadas de cima para baixo. A regra no topo da lista tem precedência sobre regras inferiores concorrentes."
+        )
+
+        # EXERCÍCIO 5
+        st.markdown("---")
+        render_anti_hallucination_quiz(
+            key="m4_quiz_icons",
+            question="**Exercício 5 (Quiz de Design Visual):** Por que o uso de 'Conjunto de Ícones' (com setas para cima/baixo ou semáforos) costuma ser mais recomendado para relatórios corporativos do que simplesmente pintar o fundo inteiro de 500 linhas de tabela?",
+            options=[
+                "Porque ícones são mais leves para o disco rígido do computador.",
+                "Porque pintar o fundo de centenas de células gera poluição visual ('efeito arco-íris') que cansa a leitura, enquanto pequenos ícones mantém a elegância e clareza do dado.",
+                "Porque o Excel proíbe usar cores de fundo em mais de 10 células.",
+                "Não há diferença técnica ou visual."
             ],
             correct_index=1,
-            explanation="A opção 'Valores Duplicados' dentro de 'Regras de Realce das Células' analisa todo o intervalo selecionado e pinta instantaneamente qualquer valor que apareça 2 ou mais vezes, sendo ideal para auditoria cadastral."
+            explanation="O excesso de preenchimento colorido em tabelas densas sobrecarrega a cognição visual. Ícones discretos ou barras de dados na célula destacam a anomalia mantendo o relatório limpo."
         )
-        
+
+        # EXERCÍCIO 6
         st.markdown("---")
+        st.markdown("#### 🧪 Exercício 6: Laboratório de Prompts para Regras Visuais")
         render_prompt_sandbox(
             module_name="Módulo 4: Formatação Condicional",
-            placeholder="Exemplo: Como criar uma formatação condicional que destaque datas de entrega vencidas..."
+            placeholder="Exemplo: Proponha regras de formatação condicional acessíveis para daltônicos em uma coluna de status..."
         )
 
     render_footer()

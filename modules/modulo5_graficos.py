@@ -5,6 +5,7 @@ Conteúdos e Práticas:
 - Inserir gráficos e formatar layout (Legendas, Títulos, Eixos e Cores)
 - Prompts de IA para escolha do gráfico ideal em função dos dados
 - Prompts de IA para análise de resultados e extração de insights de negócios
+- Bateria expandida de exercícios práticos e auditoria
 """
 
 import streamlit as st
@@ -36,7 +37,7 @@ def render_modulo5_page():
         "2. Formatação de Layout",
         "3. IA para Escolha do Gráfico",
         "4. IA para Insights & Storytelling",
-        "5. Gráfico Interativo & Auditoria"
+        "5. Bateria de Exercícios & Prática"
     ])
     
     with tab1:
@@ -156,29 +157,75 @@ def render_modulo5_page():
         )
 
     with tab5:
-        st.markdown("### 🧪 Gráfico Interativo & Laboratório Analítico")
-        st.write("Veja como a visualização dos dados abaixo destaca a discrepância entre categorias:")
+        st.markdown("### 🧪 Bateria de Exercícios Práticos: Gráficos & Storytelling")
+        st.write("Resolva os desafios práticos abaixo para dominar a arte de transformar dados brutos em decisões visuais:")
         
-        dados_vendas = pd.DataFrame({
-            "Categoria": ["Eletrodomésticos", "Informática", "Móveis", "Telefonia", "Acessórios"],
-            "Vendas_Milhares_R$": [450, 680, 290, 810, 195],
-            "Destaque": ["Normal", "Normal", "Normal", "Líder de Vendas", "Normal"]
-        })
-        
-        # Gráfico interativo com Altair
-        chart = alt.Chart(dados_vendas).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
-            x=alt.X("Categoria:N", sort="-y", title="Categorias de Produtos"),
-            y=alt.Y("Vendas_Milhares_R$:Q", title="Vendas (em milhares de R$)"),
-            color=alt.Color("Destaque:N", scale=alt.Scale(domain=["Normal", "Líder de Vendas"], range=["#94A3B8", "#005A9C"]), legend=None),
-            tooltip=["Categoria", "Vendas_Milhares_R$"]
-        ).properties(height=320)
-        
-        st.altair_chart(chart, use_container_width=True)
-        
-        # Desafio Anti-Alucinação
+        # EXERCÍCIO 1
+        with st.expander("📊 Exercício 1: Laboratório Visual Interativo — Destaque de Categoria", expanded=True):
+            st.write("Analise o gráfico de barras interativo abaixo. Note como o uso intencional da cor destaca o líder sem poluir a visão:")
+            
+            dados_vendas = pd.DataFrame({
+                "Categoria": ["Eletrodomésticos", "Informática", "Móveis", "Telefonia", "Acessórios"],
+                "Vendas_Milhares_R$": [450, 680, 290, 810, 195],
+                "Destaque": ["Normal", "Normal", "Normal", "Líder de Vendas", "Normal"]
+            })
+            
+            chart = alt.Chart(dados_vendas).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                x=alt.X("Categoria:N", sort="-y", title="Categorias de Produtos"),
+                y=alt.Y("Vendas_Milhares_R$:Q", title="Vendas (em milhares de R$)"),
+                color=alt.Color("Destaque:N", scale=alt.Scale(domain=["Normal", "Líder de Vendas"], range=["#94A3B8", "#005A9C"]), legend=None),
+                tooltip=["Categoria", "Vendas_Milhares_R$"]
+            ).properties(height=320)
+            
+            st.altair_chart(chart, use_container_width=True)
+            st.caption("Exercício mental: Como você formataria esse gráfico no Excel? (Resposta: pintar a série toda de cinza e clicar duas vezes apenas na coluna de Telefonia para colori-la de azul).")
+
+        # EXERCÍCIO 2
+        with st.expander("🎯 Exercício 2: Diagnóstico de Visual — Qual Gráfico Usar?", expanded=False):
+            st.markdown(
+                """
+                **Desafio:** Relacione mentalmente a necessidade de negócio ao tipo de gráfico correto:
+                1. Acompanhar a evolução diária do preço do barril de petróleo ao longo dos últimos 180 dias.
+                2. Mostrar a divisão do orçamento familiar entre 4 categorias (Moradia, Alimentação, Saúde, Lazer).
+                3. Comparar o faturamento de 25 filiais com nomes extensos (ex: 'Filial São José dos Campos Centro').
+                4. Descobrir se funcionários mais velhos cometem menos erros de digitação em um software.
+                """
+            )
+            if st.button("Ver Resolução Técnica do Exercício 2", key="btn_ex_m5_2"):
+                st.info(
+                    "**Gabarito do Especialista:**\n"
+                    "1. **Gráfico de Linhas:** Ideal para séries temporais contínuas longas (180 pontos).\n"
+                    "2. **Gráfico de Pizza ou Rosca:** Perfeito para poucas fatias (apenas 4) totalizando 100% do orçamento.\n"
+                    "3. **Gráfico de Barras Horizontais:** Imprescindível para nomes longos, pois evita rótulos na diagonal ou cortados.\n"
+                    "4. **Gráfico de Dispersão XY:** O único capaz de traçar correlação entre duas variáveis contínuas (Idade vs Quantidade de Erros)."
+                )
+
+        # EXERCÍCIO 3
+        with st.expander("📝 Exercício 3: Prompt de Storytelling para a Diretoria", expanded=False):
+            st.markdown(
+                """
+                **Missão:** Você gerou um gráfico no Excel e precisa enviar um e-mail de 3 linhas para o diretor geral resumindo o que aconteceu no mês.  
+                Crie um prompt pedindo à IA para sintetizar os números sem jargões desnecessários:
+                """
+            )
+            ex3_p = st.text_area(
+                "Escreva seu prompt de storytelling:",
+                key="ex_m5_story_prompt",
+                placeholder="Atue como consultor executivo. Tenho os seguintes números no Excel... Redija 3 bullets acionáveis para o diretor..."
+            )
+            if st.button("Ver Sugestão do Exercício 3", key="btn_ex_m5_3"):
+                st.info(
+                    "**Dica de Engenharia de Prompt:** Peça sempre para a IA destacar:  \n"
+                    "1. O que foi bom (+).  \n"
+                    "2. Onde está o perigo/gargalo (-).  \n"
+                    "3. Qual é a recomendação prática para a próxima semana (ação)."
+                )
+
+        # EXERCÍCIO 4
+        st.markdown("---")
         render_anti_hallucination_quiz(
-            key="m5_quiz",
-            question="**Cenário de Auditoria:** Uma IA sugeriu criar um gráfico de pizza para comparar o faturamento diário de uma loja ao longo de todos os 365 dias do ano. Qual é a avaliação técnica correta sobre essa recomendação?",
+            key="m5_quiz1",
+            question="**Exercício 4 (Quiz Anti-Alucinação):** Uma IA sugeriu criar um gráfico de pizza para comparar o faturamento diário de uma loja ao longo de todos os 365 dias do ano. Qual é a avaliação técnica correta sobre essa recomendação?",
             options=[
                 "A recomendação é excelente, pois a pizza divide perfeitamente os 365 dias em 100%.",
                 "A recomendação é um erro grave de visualização; um gráfico de linhas contínuo ou colunas mensais é a escolha técnica correta.",
@@ -188,8 +235,25 @@ def render_modulo5_page():
             correct_index=1,
             explanation="Uma pizza com 365 fatias geraria uma mancha ilegível e incompreensível. Acompanhamento de tempo contínuo exige gráficos de LINHAS ou agregação em colunas mensais."
         )
-        
+
+        # EXERCÍCIO 5
         st.markdown("---")
+        render_anti_hallucination_quiz(
+            key="m5_quiz2",
+            question="**Exercício 5 (Quiz de Design):** Por que as boas práticas de design corporativo recomendam remover a legenda de um gráfico que possui apenas uma única série de colunas (ex: apenas o faturamento de 2026)?",
+            options=[
+                "Porque o Excel trava se você deixar a legenda.",
+                "Porque a legenda é redundante (o título já diz o que é o dado) e rouba espaço útil que poderia tornar as colunas maiores e mais legíveis.",
+                "Porque a legenda consome muita tinta na impressão.",
+                "Porque o padrão internacional exige legenda sempre no centro da tela."
+            ],
+            correct_index=1,
+            explanation="Princípio do 'Data-to-Ink Ratio': Todo elemento que não adiciona informação nova deve ser removido. Se o título já diz 'Faturamento 2026', ter uma legenda escrito 'Faturamento 2026' é desperdício de espaço."
+        )
+
+        # EXERCÍCIO 6
+        st.markdown("---")
+        st.markdown("#### 🧪 Exercício 6: Laboratório de Prompts & Storytelling")
         render_prompt_sandbox(
             module_name="Módulo 5: Gráficos e Storytelling",
             placeholder="Exemplo: Tenho uma tabela com dados de pesquisa de satisfação de clientes (notas de 1 a 5). Qual o melhor gráfico?"

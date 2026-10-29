@@ -11,7 +11,7 @@ from utils.ui_components import render_header, render_footer
 def render_home_page():
     render_header(
         title="Portal do Aluno: Excel Básico com IA Generativa",
-        subtitle="Curso Aberto de Aperfeiçoamento Profissional (20h) • Excel & Inteligência Artificial",
+        subtitle="Curso Aberto de Aperfeiçoamento Profissional • Excel & Inteligência Artificial",
         icon="🚀"
     )
     

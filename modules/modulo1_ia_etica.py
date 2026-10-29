@@ -36,7 +36,7 @@ def render_modulo1_page():
         "2. IA Especialista & Copilot",
         "3. Os 5 Pilares Éticos & LGPD",
         "4. Engenharia de Prompts",
-        "5. Laboratório & Auditoria"
+        "5. Bateria de Exercícios & Prática"
     ])
     
     with tab1:
@@ -198,19 +198,74 @@ def render_modulo1_page():
         
         st.markdown("#### ⏳ Autogestão do Tempo: Manual vs. IA")
         st.write(
-            "Uma das competências avaliadas no curso é a **Autogestão do Tempo**. "
+            "Uma das competências fundamentais avaliadas é a **Autogestão do Tempo**. "
             "Não gaste 5 minutos escrevendo um prompt longo para somar duas células quando você pode "
             "simplesmente teclar `Alt + =` no Excel em 1 segundo! Use a IA para tarefas repetitivas, "
             "fórmulas aninhadas complexas e análise exploratória de grandes volumes."
         )
 
     with tab5:
-        st.markdown("### 🧪 Laboratório Interativo & Testes de Auditoria")
+        st.markdown("### 🧪 Bateria Completa de Exercícios Práticos & Desafios")
+        st.write("Realize os exercícios abaixo para fixar os conceitos éticos, operacionais e de engenharia de prompt:")
         
-        # Quiz Anti-Alucinação
+        # EXERCÍCIO 1
+        with st.expander("📝 Exercício 1: Reescrita e Refinamento de Prompt (Engenharia de Prompt)", expanded=True):
+            st.markdown(
+                """
+                **Cenário:** Um colega de trabalho digitou o seguinte comando em um chat de IA:  
+                > *"Me ajuda com uma planilha de vendas"*  
+                
+                **Seu Desafio:** Identifique por que esse prompt falhará e reescreva-o aplicando as **4 Regras de Ouro** (Persona, Contexto, Instrução Direta e Formato de Saída).
+                """
+            )
+            user_reprompt = st.text_area(
+                "Escreva seu Prompt Otimizado aqui:",
+                key="ex1_reprompt",
+                placeholder="Atue como... Minha tabela possui... Preciso de... Retorne em formato..."
+            )
+            if st.button("Ver Gabarito Sugerido do Exercício 1", key="btn_ex1_ans"):
+                st.info(
+                    "**Gabarito Recomendado:**\n"
+                    "> *'Atue como especialista em Excel. Tenho uma tabela com colunas: Data (coluna A), Vendedor (coluna B) e Faturamento (coluna C). "
+                    "Crie uma fórmula em Português do Brasil para somar apenas as vendas do vendedor \"João\". Retorne a fórmula e uma breve explicação passo a passo.'*\n\n"
+                    "**Por que está melhor?** Define o papel, as colunas exatas, o objetivo e o idioma do Excel!"
+                )
+        
+        # EXERCÍCIO 2
+        with st.expander("🛡️ Exercício 2: Desafio de Anonimização & Conformidade LGPD", expanded=False):
+            st.markdown(
+                """
+                **Cenário:** Você precisa de ajuda da IA para calcular a média salarial e o tempo de casa dos funcionários da sua empresa.  
+                A planilha original contém:
+                - Coluna A: Nome Completo (Ex: João da Silva Santos)
+                - Coluna B: CPF (Ex: 123.456.789-00)
+                - Coluna C: Salário Real (Ex: R$ 8.450,00)
+                - Coluna D: Data de Admissão (Ex: 12/03/2018)
+                
+                **Pergunta de Auditoria:** Qual é a conduta correta antes de enviar o problema para um modelo público de IA?
+                """
+            )
+            lgpd_choice = st.radio(
+                "Selecione o procedimento de maior conformidade com a LGPD:",
+                [
+                    "Copiar a planilha inteira e pedir sigilo no texto do prompt.",
+                    "Apagar as colunas de Nome e CPF, e enviar apenas o cabeçalho com 2 linhas de valores fictícios mascarados.",
+                    "Enviar apenas a coluna de CPF com nomes abreviados.",
+                    "Tirar uma foto da tela com o celular e subir a imagem na IA."
+                ],
+                key="ex2_lgpd_radio"
+            )
+            if st.button("Conferir Resposta do Exercício 2", key="btn_ex2_ans"):
+                if "Apagar as colunas de Nome e CPF" in lgpd_choice:
+                    st.success("🎉 **Perfeito!** Nunca suba dados reais de pessoas ou salários. Ao enviar apenas a estrutura com dados fictícios, você obtém a fórmula correta sem colocar a empresa em risco de multas da ANPD.")
+                else:
+                    st.error("⚠️ **Risco de Violação de LGPD!** Lembre-se: pedir segredo no prompt não garante que os dados não fiquem retidos para treinamento de modelos públicos.")
+
+        # EXERCÍCIO 3
+        st.markdown("---")
         render_anti_hallucination_quiz(
-            key="m1_quiz",
-            question="**Cenário de Auditoria:** Você pediu à IA uma fórmula para calcular a média salarial no Excel em Português. A IA forneceu as opções abaixo. Qual delas está **tecnicamente correta** para a versão brasileira do Excel?",
+            key="m1_quiz1",
+            question="**Exercício 3 (Quiz Anti-Alucinação):** Você pediu à IA uma fórmula para calcular a média de uma coluna no Excel em Português do Brasil. Qual das alternativas abaixo está **tecnicamente correta**?",
             options=[
                 "=AVERAGE(C2, C10)",
                 "=MÉDIA(C2:C10)",
@@ -221,12 +276,27 @@ def render_modulo1_page():
             explanation="No Excel em português do Brasil, a função é `=MÉDIA(início:fim)` com acento agudo. O separador de intervalo contínuo é dois-pontos (`:`). A IA frequentemente sugere a função em inglês `=AVERAGE` ou alucina funções inexistentes como `CALCULAR_MEDIA`."
         )
         
+        # EXERCÍCIO 4
         st.markdown("---")
+        render_anti_hallucination_quiz(
+            key="m1_quiz2",
+            question="**Exercício 4 (Quiz de Diagnóstico Tecnológico):** Sua diretoria solicitou um modelo preditivo para estimar o faturamento diário da fábrica para os próximos 6 meses com base em 10 anos de histórico de produção. Qual ferramenta você deve propor?",
+            options=[
+                "Pedir ao ChatGPT/Gemini para adivinhar os números e colar na planilha.",
+                "Usar IA Analítica com modelos estatísticos de regressão/séries temporais, pois calculam tendências numéricas determinísticas sem alucinação de dados.",
+                "Criar uma fórmula de soma simples e multiplicar por 10.",
+                "Usar um gerador de imagens para desenhar o gráfico futuro."
+            ],
+            correct_index=1,
+            explanation="Predições numéricas rigorosas em séries temporais exigem algoritmos de IA Analítica/Estatística. LLMs generativos são feitos para linguagem e códigos, e inventariam números sem embasamento matemático real."
+        )
         
-        # Sandbox do Módulo
+        # EXERCÍCIO 5
+        st.markdown("---")
+        st.markdown("#### 🧪 Exercício 5: Laboratório Prático de Teste de Prompts")
         render_prompt_sandbox(
             module_name="Módulo 1: Fundamentos de IA",
-            placeholder="Exemplo: Qual é a diferença entre IA Analítica e IA Generativa na gestão de uma empresa?"
+            placeholder="Exemplo: Como criar uma persona de especialista em auditoria de planilhas para a IA me orientar?"
         )
 
     render_footer()
