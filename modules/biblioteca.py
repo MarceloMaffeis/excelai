@@ -164,7 +164,7 @@ def render_biblioteca_page():
             """
             - 🛡️ [Portal Oficial da ANPD (Autoridade Nacional de Proteção de Dados - Brasil)](https://www.gov.br/anpd/pt-br)
               *Conheça os direitos do titular, o conceito de dados pessoais sensíveis e as diretrizes brasileiras de privacidade.*
-            - 🌐 [Recomendações da UNESCO sobre a Ética da Inteligência Artificial](https://www.unesco.org/pt/artificial-intelligence/recommendation-ethics)
+            - 🌐 [Recomendações da UNESCO sobre a Ética da Inteligência Artificial](https://www.unesco.org/en/artificial-intelligence/recommendation-ethics)
               *Primeiro instrumento normativo global adotado por 193 países sobre transparência, equidade e supervisão humana.*
             - 🏛️ [Framework de Gestão de Riscos de IA do NIST (EUA)](https://www.nist.gov/itl/ai-risk-management-framework)
               *Padrão internacional para mitigar riscos de viés, alucinações e vazamentos em sistemas inteligentes.*
