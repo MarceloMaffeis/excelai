@@ -4,7 +4,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.35%2B-FF4B4B.svg)](https://streamlit.io/)
 
-Portal interativo e aplicação web completa desenvolvida para apoiar o curso de **Aperfeiçoamento Profissional em Excel Básico com IA Generativa (20 Horas)** do **SENAI-SP**.
+Portal interativo e aplicação web completa desenvolvida para apoiar o curso de **Aperfeiçoamento Profissional em Excel Básico com IA Generativa (20 Horas)**.
 
 O sistema foi concebido para empoderar alunos (a partir de 14 anos) no domínio de planilhas eletrônicas impulsionadas por Inteligência Artificial, priorizando a **execução técnica manual primeiro, aceleração por IA depois, responsabilidade ética com a LGPD e auditoria crítica constante contra alucinações**.
 

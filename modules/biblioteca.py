@@ -101,7 +101,7 @@ def render_biblioteca_page():
             """
         )
         st.info(
-            "💡 **Regra de Ouro do SENAI:** Ao trabalhar com IA no Excel, trate todo dado de clientes e salários como estritamente confidencial. "
+            "💡 **Regra de Ouro de Segurança:** Ao trabalhar com IA no Excel, trate todo dado de clientes e salários como estritamente confidencial. "
             "Se for pedir auxílio à IA, utilize sempre nomes e valores fictícios ou passe apenas o cabeçalho das colunas!"
         )
 
@@ -122,7 +122,7 @@ def render_biblioteca_page():
         with col2:
             st.markdown(
                 """
-                - 📥 **Baixar Planilha Modelo de Vendas (Exemplo SENAI):**
+                - 📥 **Baixar Planilha Modelo de Vendas (Exemplo Prático):**
                 """
             )
             # Tabela de exemplo pronta para download
@@ -147,8 +147,9 @@ def render_biblioteca_page():
             st.download_button(
                 label="📥 Baixar Planilha Modelo de Vendas (CSV/Excel)",
                 data=csv_buffer.getvalue().encode("utf-8-sig"),
-                file_name="exemplo_vendas_senai_2026.csv",
+                file_name="exemplo_vendas_2026.csv",
                 mime="text/csv",
+                key="btn_dl_sample_sales",
                 use_container_width=True
             )
             st.caption("Arquivo separado por ponto e vírgula (`;`), pronto para abrir diretamente no Excel.")

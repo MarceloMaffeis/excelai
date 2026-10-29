@@ -1,6 +1,6 @@
 """
 Módulo 4: Formatação Condicional no Excel & Visualização Inteligente com IA.
-Cobre 100% da Ementa SENAI:
+Conteúdos e Práticas:
 - Regras de realce (Maior que, Menor que, Está entre, Texto que contém, Duplicados)
 - Escalas de cor, barras de dados e conjuntos de ícones
 - Gerenciamento de regras (editar, prioridade, parar se verdadeiro e excluir)
@@ -132,7 +132,7 @@ def render_modulo4_page():
         )
         
         render_audit_alert(
-            "Atenção à Acessibilidade Visual: No ambiente corporativo preconizado pelos pilares éticos do SENAI, "
+            "Atenção à Acessibilidade Visual: No ambiente corporativo moderno e inclusivo, "
             "lembre-se de que cerca de 8% dos homens possuem algum grau de daltonismo (dificuldade de distinguir vermelho e verde). "
             "Sempre que possível, combine cores com símbolos ou utilize tons de azul e laranja para garantir inclusão total."
         )

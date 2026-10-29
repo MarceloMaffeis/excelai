@@ -1,6 +1,6 @@
 """
 Módulo 3: Fórmulas e Funções no Excel & Otimização com IA.
-Cobre 100% da Ementa SENAI:
+Conteúdos e Práticas:
 - 4 operações aritméticas básicas e ordem de precedência
 - Cálculos com percentuais (acréscimos, descontos e variação)
 - Referências: Relativa, Absoluta ($) e Mista

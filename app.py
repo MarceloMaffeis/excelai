@@ -1,5 +1,5 @@
 """
-Portal Educacional: Excel Básico com IA Generativa (SENAI-SP 2026)
+Portal Educacional: Excel Básico com IA Generativa (2026)
 Ponto de Entrada Principal da Aplicação Streamlit.
 Disponibilizado sob os termos da Licença MIT (Open Source).
 """
@@ -9,7 +9,7 @@ import streamlit as st
 
 # 1. Configuração Inicial da Página
 st.set_page_config(
-    page_title="Excel com IA Generativa | SENAI-SP",
+    page_title="Excel com IA Generativa | Portal Educacional",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -44,7 +44,7 @@ with st.sidebar:
                 Excel + IA Generativa
             </h2>
             <div style="font-size: 0.85rem; color: #64748B; font-weight: 600;">
-                SENAI-SP • 20 Horas
+                Formação Profissional • 20 Horas
             </div>
         </div>
         """,
@@ -53,38 +53,26 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # Navegação entre Páginas
-    nav_options = {
-        "home": "🏠 Início & Visão Geral",
-        "biblioteca": "📚 Biblioteca de Recursos (Livre)",
-        "modulo1": f"{'🔓' if is_unlocked('modulo1') else '🔒'} Módulo 1: Fundamentos & Ética",
-        "modulo2": f"{'🔓' if is_unlocked('modulo2') else '🔒'} Módulo 2: Objetos do Excel",
-        "modulo3": f"{'🔓' if is_unlocked('modulo3') else '🔒'} Módulo 3: Fórmulas e Funções",
-        "modulo4": f"{'🔓' if is_unlocked('modulo4') else '🔒'} Módulo 4: Formatação Condicional",
-        "modulo5": f"{'🔓' if is_unlocked('modulo5') else '🔒'} Módulo 5: Gráficos e Análise"
-    }
+    # Navegação entre Páginas com Botões Estilizados (Totalmente Confiável)
+    st.markdown("#### 🧭 Menu Curricular")
     
-    # Identificar a chave ativa
-    current_key = st.session_state.active_page
-    if current_key not in nav_options:
-        current_key = "home"
-        
-    labels = list(nav_options.values())
-    keys = list(nav_options.keys())
-    current_index = keys.index(current_key)
+    nav_options = [
+        ("home", "🏠 Início & Visão Geral"),
+        ("biblioteca", "📚 Biblioteca de Recursos (Livre)"),
+        ("modulo1", f"{'🔓' if is_unlocked('modulo1') else '🔒'} Módulo 1: Fundamentos & Ética"),
+        ("modulo2", f"{'🔓' if is_unlocked('modulo2') else '🔒'} Módulo 2: Objetos do Excel"),
+        ("modulo3", f"{'🔓' if is_unlocked('modulo3') else '🔒'} Módulo 3: Fórmulas e Funções"),
+        ("modulo4", f"{'🔓' if is_unlocked('modulo4') else '🔒'} Módulo 4: Formatação Condicional"),
+        ("modulo5", f"{'🔓' if is_unlocked('modulo5') else '🔒'} Módulo 5: Gráficos e Análise")
+    ]
     
-    selected_label = st.radio(
-        "Navegação Curricular:",
-        options=labels,
-        index=current_index,
-        key="nav_radio"
-    )
-    
-    selected_key = keys[labels.index(selected_label)]
-    if selected_key != st.session_state.active_page:
-        st.session_state.active_page = selected_key
-        st.rerun()
-        
+    for key, label in nav_options:
+        is_active = (st.session_state.active_page == key)
+        btn_type = "primary" if is_active else "secondary"
+        if st.button(label, key=f"sidebar_nav_{key}", use_container_width=True, type=btn_type):
+            st.session_state.active_page = key
+            st.rerun()
+            
     st.markdown("---")
     
     # Indicador de Progresso Rápido
@@ -171,7 +159,7 @@ else:
                 <h4 style="color: #475569; margin: 0.3rem 0 1rem 0;">{info.get('title', 'Módulo')}</h4>
                 <p style="color: #64748B; font-size: 0.95rem; line-height: 1.5;">
                     Para acessar o conteúdo explicativo e os exercícios deste módulo, 
-                    insira a senha informada pelo instrutor da turma.
+                    insira a senha temática informada pelo instrutor da turma.
                 </p>
                 <div style="background: #F8FAFC; padding: 0.8rem; border-radius: 6px; font-size: 0.88rem; color: #334155; margin-bottom: 1.2rem;">
                     💡 <strong>Dica Cultural:</strong> A senha é o sobrenome ou nome de uma grande mente pioneira da história da computação.
@@ -184,13 +172,13 @@ else:
         col_c1, col_c2, col_c3 = st.columns([1, 2, 1])
         with col_c2:
             input_pwd = st.text_input("Digite a senha do módulo:", type="password", key=f"direct_unlock_{active_page}")
-            if st.button("🔓 Desbloquear Acesso", use_container_width=True, type="primary"):
+            if st.button("🔓 Desbloquear Acesso", key=f"btn_unlock_screen_{active_page}", use_container_width=True, type="primary"):
                 if verify_password(active_page, input_pwd):
-                    st.success("Módulo desbloqueado com sucesso! Carregando...")
+                    st.success("Módulo desbloqueado com sucesso! Redirecionando...")
                     st.rerun()
                 else:
-                    st.error("Senha incorreta. Solicite ao professor da turma.")
+                    st.error("Senha incorreta. Solicite ao professor ou instrutor da turma.")
                     
-            if st.button("⬅️ Voltar para o Início", use_container_width=True):
+            if st.button("⬅️ Voltar para o Início", key=f"btn_back_home_{active_page}", use_container_width=True):
                 st.session_state.active_page = "home"
                 st.rerun()

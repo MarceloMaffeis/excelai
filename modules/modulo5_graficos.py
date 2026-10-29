@@ -1,6 +1,6 @@
 """
 Módulo 5: Gerenciamento de Gráficos & Storytelling com IA.
-Cobre 100% da Ementa SENAI:
+Conteúdos e Práticas:
 - Tipos de gráficos e seus objetivos (Colunas/Barras, Pizza, Dispersão XY)
 - Inserir gráficos e formatar layout (Legendas, Títulos, Eixos e Cores)
 - Prompts de IA para escolha do gráfico ideal em função dos dados
@@ -94,7 +94,7 @@ def render_modulo5_page():
     with tab2:
         st.markdown("### 5.3 — Formatação de Layout: O Design da Clareza")
         st.write(
-            "O padrão SENAI recomenda remover elementos visuais poluentes e priorizar o foco na mensagem:"
+            "As boas práticas de visualização recomendam remover elementos visuais poluentes e priorizar o foco na mensagem:"
         )
         
         st.markdown(

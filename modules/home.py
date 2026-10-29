@@ -11,7 +11,7 @@ from utils.ui_components import render_header, render_footer
 def render_home_page():
     render_header(
         title="Portal do Aluno: Excel Básico com IA Generativa",
-        subtitle="Formação Inicial e Continuada • Aperfeiçoamento Profissional (20h) • SENAI-SP",
+        subtitle="Curso Aberto de Aperfeiçoamento Profissional (20h) • Excel & Inteligência Artificial",
         icon="🚀"
     )
     
@@ -39,14 +39,14 @@ def render_home_page():
         st.markdown(f"**Progresso de Desbloqueio dos Módulos:** {unlocked_count} de {total_count} módulos disponíveis ({pct}%)")
         st.progress(pct / 100)
     with col_p2:
-        if st.button("📚 Ir para Biblioteca (Acesso Livre)", use_container_width=True, type="secondary"):
+        if st.button("📚 Ir para Biblioteca (Acesso Livre)", key="home_btn_goto_library", use_container_width=True, type="secondary"):
             st.session_state.active_page = "biblioteca"
             st.rerun()
             
     st.markdown("---")
     
     # Informações Pedagógicas (Competências Socioemocionais)
-    with st.expander("🎯 Competências e Habilidades Desenvolvidas no Curso (Metodologia SENAI)", expanded=False):
+    with st.expander("🎯 Competências e Habilidades Desenvolvidas no Curso", expanded=False):
         c1, c2, c3 = st.columns(3)
         with c1:
             st.markdown("#### ⏳ Autogestão & Tempo")
@@ -68,7 +68,7 @@ def render_home_page():
             )
             
     st.markdown("### 📑 Módulos Curriculares")
-    st.caption("Insira a senha fornecida pelo instrutor em sala de aula para desbloquear cada módulo no momento adequado.")
+    st.caption("Insira a senha temática informada pelo instrutor para desbloquear cada módulo no momento adequado das aulas.")
     
     # Grid de Módulos
     modules_list = [
@@ -115,12 +115,12 @@ def render_home_page():
                         st.write(f"Digite a senha para acessar o **{title}**:")
                         st.caption("Dica: Nome de um pioneiro ou pioneira da computação.")
                         input_pwd = st.text_input("Senha:", type="password", key=f"pwd_input_{key}")
-                        if st.button("Confirmar", key=f"confirm_btn_{key}", use_container_width=True):
+                        if st.button("Confirmar", key=f"confirm_btn_{key}", use_container_width=True, type="primary"):
                             if verify_password(key, input_pwd):
-                                st.success("Desbloqueado com sucesso!")
+                                st.session_state.active_page = key
                                 st.rerun()
                             else:
-                                st.error("Senha incorreta. Verifique com seu professor.")
+                                st.error("Senha incorreta. Verifique com seu professor ou instrutor.")
                                 
             st.markdown("<hr style='margin: 0.5rem 0 1rem 0; border: none; border-top: 1px solid #F1F5F9;' />", unsafe_allow_html=True)
 

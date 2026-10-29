@@ -1,6 +1,6 @@
 """
 Módulo 2: Gerenciamento de Objetos do Excel & Estruturação com IA.
-Cobre 100% da Ementa SENAI:
+Conteúdos e Práticas:
 - Células, Endereçamento, Linhas, Colunas, Formatação, Filtros e Opções de Colagem
 - Planilhas e Pasta de Trabalho
 - Formatação como Tabela oficial e integração com Power Apps
@@ -61,7 +61,7 @@ def render_modulo2_page():
                   - **Data:** Converte o número de série em formato civil (ex: `29/10/2026`).
                 """
             )
-        with c2:
+        with col2 if 'col2' in locals() else c2:
             st.markdown(
                 """
                 - 📋 **Opções Especiais de Colagem (`Colar Especial`):**
@@ -171,8 +171,9 @@ def render_modulo2_page():
         st.download_button(
             label="📥 Baixar Tabela de Exemplo (CSV)",
             data=csv_buffer.getvalue().encode("utf-8-sig"),
-            file_name="tabela_maquinas_senai.csv",
-            mime="text/csv"
+            file_name="tabela_maquinas_exemplo.csv",
+            mime="text/csv",
+            key="btn_dl_sample_machines"
         )
         
         # Desafio Anti-Alucinação

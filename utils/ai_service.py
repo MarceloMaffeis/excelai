@@ -21,13 +21,13 @@ def get_secret(key_name: str, default: str = "") -> str:
 def simulate_offline_response(prompt: str, system_context: str = "") -> str:
     """
     Gera uma resposta pedagógica heurística caso não haja conexão com IA externa.
-    Garante que o aluno sempre receba feedback didático no estilo SENAI.
+    Garante que o aluno sempre receba feedback didático de alta qualidade.
     """
     lower = prompt.lower()
     
     if "soma" in lower or "total" in lower:
         return (
-            "### 🎓 Tutor Educacional (Modo Simulado SENAI)\n\n"
+            "### 🎓 Tutor Educacional (Modo Simulado Inteligente)\n\n"
             "**Solução Recomendada no Excel:**\n"
             "Para somar valores no Excel, utilize a função nativa `=SOMA(intervalo)`.\n\n"
             "**Exemplo de Fórmula:**\n"
@@ -40,7 +40,7 @@ def simulate_offline_response(prompt: str, system_context: str = "") -> str:
         )
     elif "média" in lower or "media" in lower:
         return (
-            "### 🎓 Tutor Educacional (Modo Simulado SENAI)\n\n"
+            "### 🎓 Tutor Educacional (Modo Simulado Inteligente)\n\n"
             "**Solução Recomendada no Excel:**\n"
             "A função `=MÉDIA(intervalo)` calcula a média aritmética dos valores numéricos desconsiderando células vazias.\n\n"
             "**Exemplo de Fórmula:**\n"
@@ -52,7 +52,7 @@ def simulate_offline_response(prompt: str, system_context: str = "") -> str:
         )
     elif "se" in lower or "condição" in lower or "condicional" in lower:
         return (
-            "### 🎓 Tutor Educacional (Modo Simulado SENAI)\n\n"
+            "### 🎓 Tutor Educacional (Modo Simulado Inteligente)\n\n"
             "**Solução Recomendada no Excel:**\n"
             "A função lógica `=SE(teste_lógico; valor_se_verdadeiro; valor_se_falso)` permite tomar decisões automáticas na planilha.\n\n"
             "**Exemplo Prático (Aprovado/Reprovado):**\n"
@@ -64,7 +64,7 @@ def simulate_offline_response(prompt: str, system_context: str = "") -> str:
         )
     elif "cont.se" in lower or "contar" in lower:
         return (
-            "### 🎓 Tutor Educacional (Modo Simulado SENAI)\n\n"
+            "### 🎓 Tutor Educacional (Modo Simulado Inteligente)\n\n"
             "**Solução Recomendada no Excel:**\n"
             "A função `=CONT.SE(intervalo; critérios)` conta a quantidade de células que atendem a uma condição específica.\n\n"
             "**Exemplo:**\n"
@@ -76,7 +76,7 @@ def simulate_offline_response(prompt: str, system_context: str = "") -> str:
         )
     elif "gráfico" in lower or "grafico" in lower or "dashboard" in lower:
         return (
-            "### 🎓 Tutor Educacional (Modo Simulado SENAI)\n\n"
+            "### 🎓 Tutor Educacional (Modo Simulado Inteligente)\n\n"
             "**Recomendação de Visualização:**\n"
             "- **Colunas/Barras:** Ideal para comparar categorias (ex: vendas por região).\n"
             "- **Linhas:** Ideal para evolução temporal contínua (ex: faturamento mensal ao longo do ano).\n"
@@ -90,17 +90,17 @@ def simulate_offline_response(prompt: str, system_context: str = "") -> str:
     elif "ética" in lower or "lgpd" in lower or "privacidade" in lower:
         return (
             "### 🎓 Tutor Educacional: Ética & LGPD no uso de IA\n\n"
-            "**Diretrizes Fundamentais do SENAI:**\n"
+            "**Diretrizes Fundamentais de Ética & LGPD:**\n"
             "1. **Anonimização Prévia:** Nunca envie dados com CPF, nomes completos de clientes, salários ou informações sigilosas da empresa para ferramentas de IA públicas.\n"
             "2. **Estrutura vs Conteúdo:** Envie apenas o cabeçalho e a lógica da tabela (ex: *Coluna A: Data, Coluna B: Valor*), nunca a base de clientes real.\n"
             "3. **Responsabilidade Humana:** A IA é apenas assistente. A assinatura e responsabilidade técnica pelo relatório são sempre suas!"
         )
     else:
         return (
-            f"### 🎓 Tutor Educacional SENAI (Resposta Pedagógica)\n\n"
+            f"### 🎓 Tutor Educacional de Excel & IA\n\n"
             f"Você consultou sobre: **'{prompt}'**.\n\n"
             "**Recomendações Práticas:**\n"
-            "1. **Estruturação:** Certifique-se de que seus dados no Excel estão em formato de Tabela (`Ctrl + Alt + T`).\n"
+            "1. **Estruturação:** Certifique-se de que seus dados no Excel estão em formato de Tabela (`Ctrl + T`).\n"
             "2. **Engenharia de Prompt:** Ao formular sua dúvida para a IA, indique: seu objetivo, o formato da planilha (colunas e tipos) e o resultado desejado.\n"
             "3. **Auditoria Humana:** Sempre teste a fórmula ou sugestão em 2 ou 3 linhas conhecidas antes de aplicar em toda a planilha.\n\n"
             "*Dica: Configure uma chave de API na barra lateral para habilitar respostas em tempo real com modelos generativos online.*"
@@ -193,7 +193,7 @@ def generate_ai_response(
     Prioriza o provedor selecionado com fallback elegante para o simulador se houver erro.
     """
     system_prompt = (
-        "Você é o Tutor Virtual do curso 'Excel Básico com IA Generativa' do SENAI-SP. "
+        "Você é o Tutor Virtual do curso 'Excel Básico com IA Generativa'. "
         "Sua missão é explicar conceitos de Excel básico, sugerir fórmulas corretas em Português "
         "(lembrando que no Brasil usamos ponto e vírgula ';' como separador), ensinar engenharia de prompt "
         "e reforçar sempre a responsabilidade humana, auditoria contra alucinações e respeito à privacidade (LGPD)."

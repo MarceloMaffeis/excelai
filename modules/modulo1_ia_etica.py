@@ -1,6 +1,6 @@
 """
 Módulo 1: Fundamentos da Inteligência Artificial & Ética.
-Cobre 100% dos tópicos da Ementa SENAI:
+Cobre tópicos essenciais:
 - IA Analítica vs IA Generativa (histórico, diferenças e aplicações)
 - Pilares Éticos (Responsabilidade, Privacidade/LGPD, Transparência, Imparcialidade, Inclusão)
 - Engenharia de Prompts e Boas Práticas
@@ -58,7 +58,7 @@ def render_modulo1_page():
                         <strong>predições numéricas</strong> precisas.
                     </p>
                     <ul style="font-size: 0.9rem; color: #475569; padding-left: 1.2rem;">
-                        <li><strong>Histórico:</strong> Evoluiu a partir da estatística e algoritmos de Machine Learning (como Scikit-Learn, regressões e árvores de decisão).</li>
+                        <li><strong>Histórico:</strong> Evoluiu a partir da estatística e algoritmos de Machine Learning (como regressões e árvores de decisão).</li>
                         <li><strong>Exemplos:</strong> Previsão de demanda de vendas para o próximo mês; detecção de fraudes em cartões; score de crédito.</li>
                         <li><strong>Vantagem:</strong> Determinística e altamente precisa para números e tendências quantitativas.</li>
                     </ul>
@@ -126,17 +126,11 @@ def render_modulo1_page():
             3. **Execução Segura:** Quando você pede ao Copilot para criar uma coluna de cálculo, ele gera a **fórmula nativa do Excel** para você inspecionar antes de aplicar, em vez de alterar seus dados de forma invisível.
             """
         )
-        
-        st.image(
-            "https://learn.microsoft.com/pt-br/training/achievements/ai-concepts.svg",
-            caption="O papel da IA como copiloto do trabalhador: acelerar a rotina, mantendo o humano no comando.",
-            width=180
-        )
 
     with tab3:
         st.markdown("### 1.3 — Os 5 Pilares Éticos no Uso da Inteligência Artificial")
         st.write(
-            "No ambiente industrial e corporativo preconizado pelo SENAI, a tecnologia deve sempre respeitar "
+            "No ambiente corporativo e profissional moderno, a tecnologia deve sempre respeitar "
             "padrões de segurança, integridade e governança. Conheça os 5 pilares:"
         )
         
@@ -163,7 +157,7 @@ def render_modulo1_page():
             )
             
         render_audit_alert(
-            "Técnica de Ofuscação Recomendada pelo SENAI: Ao solicitar apoio da IA para resolver um problema "
+            "Técnica de Ofuscação e Proteção Recomendada: Ao solicitar apoio da IA para resolver um problema "
             "em uma planilha de RH ou financeira, substitua os nomes reais por 'Colaborador A', 'Colaborador B' "
             "e multiplique os valores por fatores fictícios (ex: 100, 200, 300). Passe apenas a estrutura lógica!"
         )
@@ -189,7 +183,7 @@ def render_modulo1_page():
         render_prompt_card(
             title="Prompt Perfeito para Criação de Fórmulas no Excel",
             prompt_text=(
-                "Atue como instrutor de informática do SENAI.\n"
+                "Atue como instrutor especialista em Microsoft Excel e IA.\n"
                 "Tenho uma planilha de controle de estoque no Excel com as seguintes colunas:\n"
                 "- Coluna A: Código_Produto\n"
                 "- Coluna B: Quantidade_Atual (número inteiro)\n"
@@ -232,7 +226,7 @@ def render_modulo1_page():
         # Sandbox do Módulo
         render_prompt_sandbox(
             module_name="Módulo 1: Fundamentos de IA",
-            placeholder="Exemplo: Qual é a diferença entre IA Analítica e IA Generativa na gestão de uma fábrica?"
+            placeholder="Exemplo: Qual é a diferença entre IA Analítica e IA Generativa na gestão de uma empresa?"
         )
 
     render_footer()

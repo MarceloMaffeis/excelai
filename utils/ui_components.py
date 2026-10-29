@@ -1,7 +1,7 @@
 """
 Componentes de Interface de Usuário (UI) Reutilizáveis.
 Inclui cabeçalhos, rodapé com Licença MIT explícita, caixas de prompt,
-desafios anti-alucinação e o laboratório de prompts (Prompt Sandbox).
+desafios anti-alucinação persistentes e o laboratório de prompts (Prompt Sandbox).
 """
 
 import streamlit as st
@@ -87,15 +87,21 @@ def render_anti_hallucination_quiz(key: str, question: str, options: list, corre
         key=f"quiz_radio_{key}"
     )
     
+    result_key = f"quiz_result_{key}"
+    
     col1, col2 = st.columns([1, 4])
     with col1:
-        if st.button("Validar Resposta", key=f"quiz_btn_{key}"):
+        if st.button("Validar Resposta", key=f"quiz_btn_{key}", type="primary"):
             user_idx = options.index(selected)
-            if user_idx == correct_index:
-                st.success("🎉 **Excelente auditoria!** Você identificou a resposta correta e não se deixou enganar por erros sutis da IA.")
-            else:
-                st.error("⚠️ **Atenção aos detalhes!** A IA gerou uma alucinação ou erro de sintaxe nesta opção. Veja a explicação abaixo:")
-            st.info(f"**Explicação do Especialista SENAI:** {explanation}")
+            is_correct = (user_idx == correct_index)
+            st.session_state[result_key] = is_correct
+            
+    if result_key in st.session_state:
+        if st.session_state[result_key]:
+            st.success("🎉 **Excelente auditoria!** Você identificou a resposta correta e não se deixou enganar por erros sutis da IA.")
+        else:
+            st.error("⚠️ **Atenção aos detalhes!** A opção selecionada possui uma alucinação ou erro de sintaxe.")
+        st.info(f"**Explicação Técnica Especializada:** {explanation}")
 
 def render_prompt_sandbox(module_name: str, placeholder: str = ""):
     """Sandbox interativo para o aluno testar prompts diretamente na página."""
@@ -111,6 +117,8 @@ def render_prompt_sandbox(module_name: str, placeholder: str = ""):
             key=f"sandbox_input_{module_name}",
             height=100
         )
+        
+        resp_key = f"sandbox_resp_{module_name}"
         
         col1, col2 = st.columns([1, 3])
         with col1:
@@ -128,8 +136,11 @@ def render_prompt_sandbox(module_name: str, placeholder: str = ""):
                     custom_foundry_model=st.session_state.get("custom_foundry_model", ""),
                     custom_ollama_model=st.session_state.get("custom_ollama_model", "llama3")
                 )
-                st.markdown("---")
-                st.markdown(resp)
+                st.session_state[resp_key] = resp
+                
+        if resp_key in st.session_state:
+            st.markdown("---")
+            st.markdown(st.session_state[resp_key])
 
 def render_footer():
     """Renderiza o rodapé oficial e vinculante de Licença MIT em todas as telas."""
@@ -143,16 +154,16 @@ def render_footer():
                 <span class="mit-tag">🛡️ Open Source</span>
             </div>
             <div>
-                <strong>Portal Educacional Excel Básico com IA Generativa (SENAI-SP 2026)</strong><br>
+                <strong>Portal Educacional: Excel Básico com IA Generativa (2026)</strong><br>
                 Este sistema é disponibilizado livremente sob os termos da 
                 <a href="https://opensource.org/licenses/MIT" target="_blank" style="color: #005A9C; text-decoration: underline;">
                     Licença MIT
                 </a>.
                 Permitido o uso, estudo, cópia, modificação, fusão, publicação e distribuição ilimitada para fins educacionais,
-                comerciais ou de pesquisa, garantindo proteção contra revogação de acesso.
+                comerciais ou de pesquisa, garantindo proteção total contra revogação de acesso.
             </div>
             <div style="margin-top: 0.5rem; font-size: 0.78rem; color: #94A3B8;">
-                Desenvolvido para fins de qualificação e aperfeiçoamento profissional em Tecnologia da Informação.
+                Recurso aberto desenvolvido para qualificação e aperfeiçoamento profissional em Tecnologia da Informação.
             </div>
         </div>
         """,
